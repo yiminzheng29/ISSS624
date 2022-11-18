@@ -5,8 +5,46 @@ editor: visual
 
 ## Overview
 
-This is the overview paragraph.
+Hands-on Exercise 1: Geospatial Data Wrangling with R
+
+Hands-on Exercise 2:
 
 ## Getting Started
 
-This is the getting started paragraph
+### Hands-on Exercise 1: Geospatial Data Wrangling with R
+
+1.  Importing polygon feature data in shapefile format
+
+    ```{r}
+    mpsz = st_read(dsn = "Hands-on_Ex1/data/geospatial", 
+                      layer = "MP14_SUBZONE_WEB_PL")
+    ```
+
+2.  Importing polyline feature data in shapefile format
+
+    ```{r}
+    cyclingpath = st_read(dsn = "Hands-on_Ex1/data/geospatial", layer = "CyclingPathGazette")
+
+    ```
+
+3.  Importing GIS data in kml format
+
+    ```{r}
+    preschool = st_read("Hands-on_Ex1/data/geospatial/pre-schools-location-kml.kml")
+
+    ```
+
+```{=html}
+<!-- -->
+```
+5.  Checking the content of a Simple Feature Data Frame
+    1.  Working with st_geometry()
+
+        ```{r}
+        st_geometry(mpsz)
+
+        ```
+
+```{r}
+ggplot(data=mpsz3414, aes(x= as.numeric(`PreSch Density`), y= as.numeric(`PreSch Count`)))+geom_point()
+```
