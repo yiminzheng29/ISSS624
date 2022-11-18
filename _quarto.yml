@@ -11,7 +11,7 @@ website:
             href: Hands-on_Ex01.qmd
             menu: 
               - text: Geospatial Data Wrangling with R
-                href: Geospatial Data Wrangling with R.qmd
+                href: Hands_on_1A.qmd
             
     right:
       - href: index.qmd
