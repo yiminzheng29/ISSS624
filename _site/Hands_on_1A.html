@@ -175,6 +175,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    
   <ul>
   <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting Started</a></li>
+  <li><a href="#data-acquisition" id="toc-data-acquisition" class="nav-link" data-scroll-target="#data-acquisition">Data Acquisition</a>
+  <ul class="collapse">
+  <li><a href="#importing-geospatial-data" id="toc-importing-geospatial-data" class="nav-link" data-scroll-target="#importing-geospatial-data">Importing Geospatial Data</a></li>
+  </ul></li>
+  <li><a href="#checking-the-content-of-a-simple-feature-data-frame" id="toc-checking-the-content-of-a-simple-feature-data-frame" class="nav-link" data-scroll-target="#checking-the-content-of-a-simple-feature-data-frame">Checking the Content of A Simple Feature Data Frame</a></li>
+  <li><a href="#plotting-the-geospatial-data" id="toc-plotting-the-geospatial-data" class="nav-link" data-scroll-target="#plotting-the-geospatial-data">Plotting the Geospatial data</a></li>
+  <li><a href="#working-with-projection" id="toc-working-with-projection" class="nav-link" data-scroll-target="#working-with-projection">Working with Projection</a></li>
+  <li><a href="#importing-and-converting-an-apspatial-data" id="toc-importing-and-converting-an-apspatial-data" class="nav-link" data-scroll-target="#importing-and-converting-an-apspatial-data">Importing and converting An Apspatial Data</a></li>
+  <li><a href="#geoprocessing-with-sf-package" id="toc-geoprocessing-with-sf-package" class="nav-link" data-scroll-target="#geoprocessing-with-sf-package">Geoprocessing with sf package</a></li>
+  <li><a href="#exploratory-data-analysis-eda" id="toc-exploratory-data-analysis-eda" class="nav-link" data-scroll-target="#exploratory-data-analysis-eda">Exploratory Data Analysis (EDA)</a></li>
   </ul>
 </nav>
     </div>
@@ -202,6 +212,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(sf, tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="data-acquisition" class="level2">
+<h2 class="anchored" data-anchor-id="data-acquisition">Data Acquisition</h2>
+<section id="importing-geospatial-data" class="level3">
+<h3 class="anchored" data-anchor-id="importing-geospatial-data">Importing Geospatial Data</h3>
 <ol type="1">
 <li><p><u>Importing polygon feature data in shapefile format</u></p>
 <div class="cell">
@@ -216,7 +231,7 @@ Bounding box:  xmin: 2667.538 ymin: 15748.72 xmax: 56396.44 ymax: 50256.33
 Projected CRS: SVY21</code></pre>
 </div>
 </div></li>
-<li><p><u>Importing polyline feature data in shapefile format</u></p>
+<li><p><u>Importing polyline feature data in shapefile form</u></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>cyclingpath <span class="ot">=</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">"Hands-on_Ex1/data/geospatial"</span>, </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">layer =</span> <span class="st">"CyclingPathGazette"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -245,6 +260,12 @@ z_range:       zmin: 0 zmax: 0
 Geodetic CRS:  WGS 84</code></pre>
 </div>
 </div></li>
+</ol>
+</section>
+</section>
+<section id="checking-the-content-of-a-simple-feature-data-frame" class="level2">
+<h2 class="anchored" data-anchor-id="checking-the-content-of-a-simple-feature-data-frame">Checking the Content of A Simple Feature Data Frame</h2>
+<ol type="1">
 <li><p><u>Working with st_geometry()</u></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_geometry</span>(mpsz)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -328,7 +349,10 @@ Projected CRS: SVY21
 5 30005.70   2825.594   387429.4 MULTIPOLYGON (((26451.03 30...</code></pre>
 </div>
 </div></li>
-<li><p><u>Plotting the Geospatial Data</u></p>
+</ol>
+</section>
+<section id="plotting-the-geospatial-data" class="level2">
+<h2 class="anchored" data-anchor-id="plotting-the-geospatial-data">Plotting the Geospatial data</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mpsz)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -344,10 +368,20 @@ all</code></pre>
 <div class="cell-output-display">
 <p><img src="Hands_on_1A_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
-</div></li>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mpsz[<span class="st">"PLN_AREA_N"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Hands_on_1A_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="working-with-projection" class="level2">
+<h2 class="anchored" data-anchor-id="working-with-projection">Working with Projection</h2>
+<ol type="1">
 <li><p><u>Assigning EPSG code to a simple feature data frame</u></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(mpsz)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(mpsz)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Coordinate Reference System:
   User input: SVY21 
@@ -388,17 +422,17 @@ PROJCRS["SVY21",
             LENGTHUNIT["metre",1,
                 ID["EPSG",9001]]]]</code></pre>
 </div>
-</div>
-<p>Assigning correct EPSG code to mpsz dataframe</p>
+</div></li>
+<li><p><u>Assigning correct EPSG code to mpsz dataframe</u></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>mpsz3414 <span class="ot">&lt;-</span> <span class="fu">st_set_crs</span>(mpsz, <span class="dv">3414</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>mpsz3414 <span class="ot">&lt;-</span> <span class="fu">st_set_crs</span>(mpsz, <span class="dv">3414</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: st_crs&lt;- : replacing crs does not reproject data; use st_transform for
 that</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(mpsz3414)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(mpsz3414)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Coordinate Reference System:
   User input: EPSG:3414 
@@ -445,7 +479,7 @@ PROJCRS["SVY21 / Singapore TM",
 </div></li>
 <li><p><u>Transforming the projection of preschool from wgs84 to svy21</u></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_geometry</span>(preschool)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_geometry</span>(preschool)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Geometry set for 1359 features 
 Geometry type: POINT
@@ -470,14 +504,14 @@ First 5 geometries:</code></pre>
 <div class="cell-output cell-output-stderr">
 <pre><code>POINT Z (103.7597 1.315983 0)</code></pre>
 </div>
-</div>
-<p>Performing project transformation using code change</p>
+</div></li>
+<li><p><u>Performing project transformation using code change</u></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>preschool3414 <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(preschool, </span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">crs =</span> <span class="dv">3414</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>preschool3414 <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(preschool, </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">crs =</span> <span class="dv">3414</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_geometry</span>(preschool3414)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_geometry</span>(preschool3414)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Geometry set for 1359 features 
 Geometry type: POINT
@@ -503,9 +537,14 @@ First 5 geometries:</code></pre>
 <pre><code>POINT Z (19810.78 33140.31 0)</code></pre>
 </div>
 </div></li>
-<li><p><u>Importing and Converting An Aspatial Data</u></p>
+</ol>
+</section>
+<section id="importing-and-converting-an-apspatial-data" class="level2">
+<h2 class="anchored" data-anchor-id="importing-and-converting-an-apspatial-data">Importing and converting An Apspatial Data</h2>
+<ol type="1">
+<li><p><u>Importing the aspatial data</u></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>listings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Hands-on_Ex1/data/aspatial/listings.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>listings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Hands-on_Ex1/data/aspatial/listings.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 4252 Columns: 16
 ── Column specification ────────────────────────────────────────────────────────
@@ -519,7 +558,7 @@ date  (1): last_review
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(listings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(listings) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
 # A tibble: 4,252 × 16
@@ -541,15 +580,16 @@ date  (1): last_review
 #   abbreviated variable names ¹​host_name, ²​neighbourhood_group,
 #   ³​neighbourhood, ⁴​latitude, ⁵​longitude, ⁶​room_type</code></pre>
 </div>
+</div></li>
+<li><p><u>Creating a simple feature dataframe from an aspatial dataframe</u></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>listings_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(listings, </span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"longitude"</span>, <span class="st">"latitude"</span>),</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">crs=</span><span class="dv">4326</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs =</span> <span class="dv">3414</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>listings_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(listings, </span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"longitude"</span>, <span class="st">"latitude"</span>),</span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">crs=</span><span class="dv">4326</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs =</span> <span class="dv">3414</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(listings_sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(listings_sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 4,252
 Columns: 15
@@ -570,33 +610,38 @@ $ availability_365               &lt;dbl&gt; 365, 365, 365, 365, 353, 364, 365, 
 $ geometry                       &lt;POINT [m]&gt; POINT (22646.02 35167.9), POINT (…</code></pre>
 </div>
 </div></li>
+</ol>
+</section>
+<section id="geoprocessing-with-sf-package" class="level2">
+<h2 class="anchored" data-anchor-id="geoprocessing-with-sf-package">Geoprocessing with sf package</h2>
+<ol type="1">
 <li><p><u>Buffering</u></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>buffer_cycling <span class="ot">&lt;-</span> <span class="fu">st_buffer</span>(cyclingpath, </span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">dist=</span><span class="dv">5</span>, <span class="at">nQuadSegs =</span> <span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>buffer_cycling <span class="ot">&lt;-</span> <span class="fu">st_buffer</span>(cyclingpath, </span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">dist=</span><span class="dv">5</span>, <span class="at">nQuadSegs =</span> <span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>buffer_cycling<span class="sc">$</span>AREA <span class="ot">&lt;-</span> <span class="fu">st_area</span>(buffer_cycling)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>buffer_cycling<span class="sc">$</span>AREA <span class="ot">&lt;-</span> <span class="fu">st_area</span>(buffer_cycling)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(buffer_cycling<span class="sc">$</span>AREA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(buffer_cycling<span class="sc">$</span>AREA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>1556978 [m^2]</code></pre>
 </div>
 </div></li>
 <li><p><u>Point-in-polygon count</u></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>mpsz3414<span class="sc">$</span><span class="st">`</span><span class="at">PreSch Count</span><span class="st">`</span><span class="ot">&lt;-</span> <span class="fu">lengths</span>(<span class="fu">st_intersects</span>(mpsz3414, preschool3414))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>mpsz3414<span class="sc">$</span><span class="st">`</span><span class="at">PreSch Count</span><span class="st">`</span><span class="ot">&lt;-</span> <span class="fu">lengths</span>(<span class="fu">st_intersects</span>(mpsz3414, preschool3414))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mpsz3414<span class="sc">$</span><span class="st">`</span><span class="at">PreSch Count</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mpsz3414<span class="sc">$</span><span class="st">`</span><span class="at">PreSch Count</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
   0.000   0.000   2.000   4.207   6.000  37.000 </code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">top_n</span>(mpsz3414, <span class="dv">1</span>, <span class="st">`</span><span class="at">PreSch Count</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">top_n</span>(mpsz3414, <span class="dv">1</span>, <span class="st">`</span><span class="at">PreSch Count</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Simple feature collection with 1 feature and 16 fields
 Geometry type: MULTIPOLYGON
@@ -612,42 +657,48 @@ Projected CRS: SVY21 / Singapore TM
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>mpsz3414<span class="sc">$</span>Area <span class="ot">&lt;-</span> mpsz3414 <span class="sc">%&gt;%</span></span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_area</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>mpsz3414<span class="sc">$</span>Area <span class="ot">&lt;-</span> mpsz3414 <span class="sc">%&gt;%</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_area</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>mpsz3414 <span class="ot">&lt;-</span> mpsz3414 <span class="sc">%&gt;%</span></span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">PreSch Density</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">PreSch Count</span><span class="st">`</span><span class="sc">/</span>Area <span class="sc">*</span> <span class="dv">1000000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>mpsz3414 <span class="ot">&lt;-</span> mpsz3414 <span class="sc">%&gt;%</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">PreSch Density</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">PreSch Count</span><span class="st">`</span><span class="sc">/</span>Area <span class="sc">*</span> <span class="dv">1000000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
-<li><p><u>Exploratory Data Analysis (EDA)</u></p>
+</ol>
+</section>
+<section id="exploratory-data-analysis-eda" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-data-analysis-eda">Exploratory Data Analysis (EDA)</h2>
+<ol type="1">
+<li><p><u>Histogram</u></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(mpsz3414<span class="sc">$</span><span class="st">`</span><span class="at">PreSch Density</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="Hands_on_1A_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mpsz3414, </span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x=</span> <span class="fu">as.numeric</span>(<span class="st">`</span><span class="at">PreSch Density</span><span class="st">`</span>)))<span class="sc">+</span></span>
-<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
-<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
-<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>) <span class="sc">+</span></span>
-<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Are pre-school even distributed in Singapore?"</span>,</span>
-<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle=</span> <span class="st">"There are many planning sub-zones with a single pre-school, on the other hand, </span><span class="sc">\n</span><span class="st">there are two planning sub-zones with at least 20 pre-schools"</span>,</span>
-<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Pre-school density (per km sq)"</span>,</span>
-<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Frequency"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(mpsz3414<span class="sc">$</span><span class="st">`</span><span class="at">PreSch Density</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Hands_on_1A_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mpsz3414, </span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x=</span> <span class="fu">as.numeric</span>(<span class="st">`</span><span class="at">PreSch Density</span><span class="st">`</span>), <span class="at">y=</span> <span class="fu">as.numeric</span>(<span class="st">`</span><span class="at">PreSch Count</span><span class="st">`</span>)))<span class="sc">+</span></span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Pre-school density (per km sq)"</span>,</span>
-<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Pre-school count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x=</span> <span class="fu">as.numeric</span>(<span class="st">`</span><span class="at">PreSch Density</span><span class="st">`</span>)))<span class="sc">+</span></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>) <span class="sc">+</span></span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Are pre-school even distributed in Singapore?"</span>,</span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle=</span> <span class="st">"There are many planning sub-zones with a single pre-school, on the other hand, </span><span class="sc">\n</span><span class="st">there are two planning sub-zones with at least 20 pre-schools"</span>,</span>
+<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Pre-school density (per km sq)"</span>,</span>
+<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Frequency"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Hands_on_1A_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
+</div>
+</div></li>
+<li><p><u>Scatterplot</u></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mpsz3414, </span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x=</span> <span class="fu">as.numeric</span>(<span class="st">`</span><span class="at">PreSch Density</span><span class="st">`</span>), <span class="at">y=</span> <span class="fu">as.numeric</span>(<span class="st">`</span><span class="at">PreSch Count</span><span class="st">`</span>)))<span class="sc">+</span></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Pre-school density (per km sq)"</span>,</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Pre-school count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Hands_on_1A_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
 </div>
 </div></li>
 </ol>
