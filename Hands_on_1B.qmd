@@ -27,7 +27,7 @@ mpsz
 popdata <- read_csv("Hands-on_Ex1/data/aspatial/respopagesextod2011to2020.csv")
 ```
 
-### Data Preparation
+## Data Preparation
 
 #### 1. Data wrangling
 
@@ -70,7 +70,7 @@ mpsz_pop2020 <- left_join(mpsz, popdata2020,
 write_rds(mpsz_pop2020, "Hands-on_Ex1/data/rds/mpszpop2020.rds")
 ```
 
-### Choropleth Mapping Geospatial Data Using tmap
+## Choropleth Mapping Geospatial Data Using tmap
 
 #### 1. Plotting a choropleth map quickly by using *qtm()*
 
@@ -298,7 +298,7 @@ agedmap <- tm_shape(mpsz_pop2020)+
 tmap_arrange(youngmap, agedmap, asp=1, ncol=2)
 ```
 
-#### 7. Mappping Spatial Object Meeting a Selection Criterion
+#### 7. Mapping Spatial Object Meeting a Selection Criterion
 
 ```{r}
 tm_shape(mpsz_pop2020[mpsz_pop2020$REGION_N=="CENTRAL REGION", ])+
