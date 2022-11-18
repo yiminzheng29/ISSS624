@@ -9,6 +9,10 @@ website:
         menu: 
           - text: Hands-on Exercise 1
             href: Hands-on_Ex01.qmd
+            menu: 
+              - text: Geospatial Data Wrangling with R
+                href: Geospatial Data Wrangling with R.qmd
+            
     right:
       - href: index.qmd
         text: Home

@@ -1,21 +1,13 @@
 ---
-title: "Hands-on Exercise 1"
+title: "Geospatial Data Wrangling with R"
 editor: visual
 ---
-
-## Overview
-
-Hands-on Exercise 1: Geospatial Data Wrangling with R
-
-Hands-on Exercise 2: Choropleth Mapping with R
 
 ## Getting Started
 
 ```{r}
 pacman::p_load(sf, tidyverse)
 ```
-
-### Hands-on Exercise 1: Geospatial Data Wrangling with R
 
 1.  [Importing polygon feature data in shapefile format]{.underline}
 
