@@ -34,7 +34,7 @@ pacman::p_load(sf, tidyverse)
     st_geometry(mpsz)
     ```
 
-5.  Working with glimpse()
+5.  [Working with glimpse()]{.underline}
 
     ```{r}
     glimpse(mpsz)
@@ -43,13 +43,13 @@ pacman::p_load(sf, tidyverse)
 ```{=html}
 <!-- -->
 ```
-7.  Working with head()
+7.  [Working with head()]{.underline}
 
     ```{r}
     head(mpsz, n=5)
     ```
 
-8.  Plotting the Geospatial Data
+8.  [Plotting the Geospatial Data]{.underline}
 
     ```{r}
     plot(mpsz)
@@ -59,7 +59,7 @@ pacman::p_load(sf, tidyverse)
     plot(st_geometry(mpsz))
     ```
 
-9.  Assigning EPSG code to a simple feature data frame
+9.  [Assigning EPSG code to a simple feature data frame]{.underline}
 
     ```{r}
     st_crs(mpsz)
@@ -75,7 +75,7 @@ pacman::p_load(sf, tidyverse)
     st_crs(mpsz3414)
     ```
 
-10. Transforming the projection of preschool from wgs84 to svy21
+10. [Transforming the projection of preschool from wgs84 to svy21]{.underline}
 
     ```{r}
     st_geometry(preschool)
@@ -92,7 +92,7 @@ pacman::p_load(sf, tidyverse)
     st_geometry(preschool3414)
     ```
 
-11. Importing and Converting An Aspatial Data
+11. [Importing and Converting An Aspatial Data]{.underline}
 
     ```{r}
     listings <- read_csv("Hands-on_Ex1/data/aspatial/listings.csv")
@@ -113,7 +113,7 @@ pacman::p_load(sf, tidyverse)
     glimpse(listings_sf)
     ```
 
-12. Buffering
+12. [Buffering]{.underline}
 
     ```{r}
     buffer_cycling <- st_buffer(cyclingpath, 
@@ -128,7 +128,7 @@ pacman::p_load(sf, tidyverse)
     sum(buffer_cycling$AREA)
     ```
 
-13. Point-in-polygon count
+13. [Point-in-polygon count]{.underline}
 
     ```{r}
     mpsz3414$`PreSch Count`<- lengths(st_intersects(mpsz3414, preschool3414))
@@ -152,7 +152,7 @@ pacman::p_load(sf, tidyverse)
       mutate(`PreSch Density` = `PreSch Count`/Area * 1000000)
     ```
 
-14. Exploratory Data Analysis (EDA)
+14. [Exploratory Data Analysis (EDA)]{.underline}
 
     ```{r}
     hist(mpsz3414$`PreSch Density`)
