@@ -40,11 +40,6 @@ Hands-on Exercise 2:
 5.  Checking the content of a Simple Feature Data Frame
     1.  Working with st_geometry()
 
-        ```{r}
-        st_geometry(mpsz)
-
-        ```
-
 ```{r}
 ggplot(data=mpsz3414, aes(x= as.numeric(`PreSch Density`), y= as.numeric(`PreSch Count`)))+geom_point()
 ```

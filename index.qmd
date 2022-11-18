@@ -9,5 +9,3 @@ In this webpage, I am going to share with you my learning journey of geospatial 
 ```{r}
 1 + 1
 ```
-
-test
