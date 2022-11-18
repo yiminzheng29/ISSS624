@@ -9,13 +9,17 @@ editor: visual
 pacman::p_load(sf, tidyverse)
 ```
 
+## Data Acquisition
+
+### Importing Geospatial Data
+
 1.  [Importing polygon feature data in shapefile format]{.underline}
 
     ```{r}
     mpsz = st_read(dsn = "Hands-on_Ex1/data/geospatial", layer = "MP14_SUBZONE_WEB_PL")
     ```
 
-2.  [Importing polyline feature data in shapefile format]{.underline}
+2.  [Importing polyline feature data in shapefile form]{.underline}
 
     ```{r}
     cyclingpath = st_read(dsn = "Hands-on_Ex1/data/geospatial", 
@@ -28,13 +32,15 @@ pacman::p_load(sf, tidyverse)
     preschool = st_read("Hands-on_Ex1/data/geospatial/pre-schools-location-kml.kml")
     ```
 
-4.  [Working with st_geometry()]{.underline}
+## Checking the Content of A Simple Feature Data Frame
+
+1.  [Working with st_geometry()]{.underline}
 
     ```{r}
     st_geometry(mpsz)
     ```
 
-5.  [Working with glimpse()]{.underline}
+2.  [Working with glimpse()]{.underline}
 
     ```{r}
     glimpse(mpsz)
@@ -49,23 +55,29 @@ pacman::p_load(sf, tidyverse)
     head(mpsz, n=5)
     ```
 
-8.  [Plotting the Geospatial Data]{.underline}
+## Plotting the Geospatial data
 
-    ```{r}
-    plot(mpsz)
-    ```
+```{r}
+plot(mpsz)
+```
 
-    ```{r}
-    plot(st_geometry(mpsz))
-    ```
+```{r}
+plot(st_geometry(mpsz))
+```
 
-9.  [Assigning EPSG code to a simple feature data frame]{.underline}
+```{r}
+plot(mpsz["PLN_AREA_N"])
+```
+
+## Working with Projection
+
+1.  [Assigning EPSG code to a simple feature data frame]{.underline}
 
     ```{r}
     st_crs(mpsz)
     ```
 
-    Assigning correct EPSG code to mpsz dataframe
+2.  [Assigning correct EPSG code to mpsz dataframe]{.underline}
 
     ```{r}
     mpsz3414 <- st_set_crs(mpsz, 3414)
@@ -75,13 +87,13 @@ pacman::p_load(sf, tidyverse)
     st_crs(mpsz3414)
     ```
 
-10. [Transforming the projection of preschool from wgs84 to svy21]{.underline}
+3.  [Transforming the projection of preschool from wgs84 to svy21]{.underline}
 
     ```{r}
     st_geometry(preschool)
     ```
 
-    Performing project transformation using code change
+4.  [Performing project transformation using code change]{.underline}
 
     ```{r}
     preschool3414 <- st_transform(preschool, 
@@ -92,15 +104,19 @@ pacman::p_load(sf, tidyverse)
     st_geometry(preschool3414)
     ```
 
-11. [Importing and Converting An Aspatial Data]{.underline}
+## Importing and converting An Apspatial Data
+
+1.  [Importing the aspatial data]{.underline}
 
     ```{r}
     listings <- read_csv("Hands-on_Ex1/data/aspatial/listings.csv")
     ```
 
     ```{r}
-    list(listings)
+    list(listings) 
     ```
+
+2.  [Creating a simple feature dataframe from an aspatial dataframe]{.underline}
 
     ```{r}
     listings_sf <- st_as_sf(listings, 
@@ -113,7 +129,9 @@ pacman::p_load(sf, tidyverse)
     glimpse(listings_sf)
     ```
 
-12. [Buffering]{.underline}
+## Geoprocessing with sf package
+
+1.  [Buffering]{.underline}
 
     ```{r}
     buffer_cycling <- st_buffer(cyclingpath, 
@@ -128,7 +146,7 @@ pacman::p_load(sf, tidyverse)
     sum(buffer_cycling$AREA)
     ```
 
-13. [Point-in-polygon count]{.underline}
+2.  [Point-in-polygon count]{.underline}
 
     ```{r}
     mpsz3414$`PreSch Count`<- lengths(st_intersects(mpsz3414, preschool3414))
@@ -152,7 +170,9 @@ pacman::p_load(sf, tidyverse)
       mutate(`PreSch Density` = `PreSch Count`/Area * 1000000)
     ```
 
-14. [Exploratory Data Analysis (EDA)]{.underline}
+## Exploratory Data Analysis (EDA)
+
+1.  [Histogram]{.underline}
 
     ```{r}
     hist(mpsz3414$`PreSch Density`)
@@ -169,6 +189,8 @@ pacman::p_load(sf, tidyverse)
           x = "Pre-school density (per km sq)",
           y = "Frequency")
     ```
+
+2.  [Scatterplot]{.underline}
 
     ```{r}
     ggplot(data=mpsz3414, 
