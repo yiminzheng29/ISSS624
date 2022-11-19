@@ -3,59 +3,58 @@ title: "Geospatial Data Wrangling with R"
 editor: visual
 ---
 
-## Getting Started
+## 1. Getting Started
+
+The code chunk below will install and load tidyverse and sf packages.
 
 ```{r}
 pacman::p_load(sf, tidyverse)
 ```
 
-## Data Acquisition
+## 2. Data Acquisition
 
-### Importing Geospatial Data
+### 1.1 Importing polygon feature data in shapefile format
 
-1.  [Importing polygon feature data in shapefile format]{.underline}
+This code chunk will import ESRI shapefile into R.
 
-    ```{r}
-    mpsz = st_read(dsn = "Hands-on_Ex1/data/geospatial", layer = "MP14_SUBZONE_WEB_PL")
-    ```
-
-2.  [Importing polyline feature data in shapefile form]{.underline}
-
-    ```{r}
-    cyclingpath = st_read(dsn = "Hands-on_Ex1/data/geospatial", 
-                             layer = "CyclingPathGazette")
-    ```
-
-3.  [Importing GIS data in kml format]{.underline}
-
-    ```{r}
-    preschool = st_read("Hands-on_Ex1/data/geospatial/pre-schools-location-kml.kml")
-    ```
-
-## Checking the Content of A Simple Feature Data Frame
-
-1.  [Working with st_geometry()]{.underline}
-
-    ```{r}
-    st_geometry(mpsz)
-    ```
-
-2.  [Working with glimpse()]{.underline}
-
-    ```{r}
-    glimpse(mpsz)
-    ```
-
-```{=html}
-<!-- -->
+```{r}
+mpsz = st_read(dsn = "Hands-on_Ex1/data/geospatial", layer = "MP14_SUBZONE_WEB_PL")
 ```
-7.  [Working with head()]{.underline}
 
-    ```{r}
-    head(mpsz, n=5)
-    ```
+### 1.2 Importing polyline feature data in shapefile format
 
-## Plotting the Geospatial data
+```{r}
+cyclingpath = st_read(dsn = "Hands-on_Ex1/data/geospatial", 
+                         layer = "CyclingPathGazette")
+```
+
+### 1.3 Importing GIS data in kml format
+
+```{r}
+preschool = st_read("Hands-on_Ex1/data/geospatial/pre-schools-location-kml.kml")
+```
+
+## 2. Checking the Content of A Simple Feature Data Frame
+
+### 2.1 Working with st_geometry()
+
+```{r}
+st_geometry(mpsz)
+```
+
+### 2.2 Working with glimpse()
+
+```{r}
+glimpse(mpsz)
+```
+
+### 2.3 Working with head()
+
+```{r}
+head(mpsz, n=5)
+```
+
+## 3. Plotting the Geospatial data
 
 ```{r}
 plot(mpsz)
@@ -69,133 +68,133 @@ plot(st_geometry(mpsz))
 plot(mpsz["PLN_AREA_N"])
 ```
 
-## Working with Projection
+## 4. Working with Projection
 
-1.  [Assigning EPSG code to a simple feature data frame]{.underline}
+### 4.1 Assigning EPSG code to a simple feature data frame
 
-    ```{r}
-    st_crs(mpsz)
-    ```
+```{r}
+st_crs(mpsz)
+```
 
-2.  [Assigning correct EPSG code to mpsz dataframe]{.underline}
+### 4.2 Assigning correct EPSG code to mpsz dataframe
 
-    ```{r}
-    mpsz3414 <- st_set_crs(mpsz, 3414)
-    ```
+```{r}
+mpsz3414 <- st_transform(mpsz, 3414)
+```
 
-    ```{r}
-    st_crs(mpsz3414)
-    ```
+```{r}
+st_crs(mpsz3414)
+```
 
-3.  [Transforming the projection of preschool from wgs84 to svy21]{.underline}
+### 4.3 Transforming the projection of preschool from wgs84 to svy21
 
-    ```{r}
-    st_geometry(preschool)
-    ```
+```{r}
+st_geometry(preschool)
+```
 
-4.  [Performing project transformation using code change]{.underline}
+### 4.4 Performing project transformation using code change
 
-    ```{r}
-    preschool3414 <- st_transform(preschool, 
-                                  crs = 3414)
-    ```
+```{r}
+preschool3414 <- st_transform(preschool, 
+                              crs = 3414)
+```
 
-    ```{r}
-    st_geometry(preschool3414)
-    ```
+```{r}
+st_geometry(preschool3414)
+```
 
-## Importing and converting An Apspatial Data
+## 5. Importing and converting An Aspatial Data
 
-1.  [Importing the aspatial data]{.underline}
+### 5.1 Importing the aspatial data
 
-    ```{r}
-    listings <- read_csv("Hands-on_Ex1/data/aspatial/listings.csv")
-    ```
+```{r}
+listings <- read_csv("Hands-on_Ex1/data/aspatial/listings.csv")
+```
 
-    ```{r}
-    list(listings) 
-    ```
+```{r}
+list(listings) 
+```
 
-2.  [Creating a simple feature dataframe from an aspatial dataframe]{.underline}
+### 5.2 Creating a simple feature dataframe from an aspatial dataframe
 
-    ```{r}
-    listings_sf <- st_as_sf(listings, 
-                           coords = c("longitude", "latitude"),
-                           crs=4326) %>%
-      st_transform(crs = 3414)
-    ```
+```{r}
+listings_sf <- st_as_sf(listings, 
+                       coords = c("longitude", "latitude"),
+                       crs=4326) %>%
+  st_transform(crs = 3414)
+```
 
-    ```{r}
-    glimpse(listings_sf)
-    ```
+```{r}
+glimpse(listings_sf)
+```
 
-## Geoprocessing with sf package
+## 6. Geoprocessing with sf package
 
-1.  [Buffering]{.underline}
+### 6.1 Buffering
 
-    ```{r}
-    buffer_cycling <- st_buffer(cyclingpath, 
-                                   dist=5, nQuadSegs = 30)
-    ```
+```{r}
+buffer_cycling <- st_buffer(cyclingpath, 
+                               dist=5, nQuadSegs = 30)
+```
 
-    ```{r}
-    buffer_cycling$AREA <- st_area(buffer_cycling)
-    ```
+```{r}
+buffer_cycling$AREA <- st_area(buffer_cycling)
+```
 
-    ```{r}
-    sum(buffer_cycling$AREA)
-    ```
+```{r}
+sum(buffer_cycling$AREA)
+```
 
-2.  [Point-in-polygon count]{.underline}
+### 6.2 Point-in-polygon count
 
-    ```{r}
-    mpsz3414$`PreSch Count`<- lengths(st_intersects(mpsz3414, preschool3414))
-    ```
+```{r}
+mpsz3414$`PreSch Count`<- lengths(st_intersects(mpsz3414, preschool3414))
+```
 
-    ```{r}
-    summary(mpsz3414$`PreSch Count`)
-    ```
+```{r}
+summary(mpsz3414$`PreSch Count`)
+```
 
-    ```{r}
-    top_n(mpsz3414, 1, `PreSch Count`)
-    ```
+```{r}
+top_n(mpsz3414, 1, `PreSch Count`)
+```
 
-    ```{r}
-    mpsz3414$Area <- mpsz3414 %>%
-      st_area()
-    ```
+```{r}
+mpsz3414$Area <- mpsz3414 %>%
+  st_area()
+```
 
-    ```{r}
-    mpsz3414 <- mpsz3414 %>%
-      mutate(`PreSch Density` = `PreSch Count`/Area * 1000000)
-    ```
+```{r}
+mpsz3414 <- mpsz3414 %>%
+  mutate(`PreSch Density` = `PreSch Count`/Area * 1000000)
+```
 
-## Exploratory Data Analysis (EDA)
+## 7. Exploratory Data Analysis (EDA)
 
-1.  [Histogram]{.underline}
+### 7.1 Histogram
 
-    ```{r}
-    hist(mpsz3414$`PreSch Density`)
-    ```
+```{r}
+hist(mpsz3414$`PreSch Density`)
+```
 
-    ```{r}
-    ggplot(data=mpsz3414, 
-           aes(x= as.numeric(`PreSch Density`)))+
-      geom_histogram(bins=20, 
-                     color="black", 
-                     fill="light blue") +
-      labs(title = "Are pre-school even distributed in Singapore?",
-           subtitle= "There are many planning sub-zones with a single pre-school, on the other hand, \nthere are two planning sub-zones with at least 20 pre-schools",
-          x = "Pre-school density (per km sq)",
-          y = "Frequency")
-    ```
+```{r}
+ggplot(data=mpsz3414, 
+       aes(x= as.numeric(`PreSch Density`)))+
+  geom_histogram(bins=20, 
+                 color="black", 
+                 fill="light blue") +
+  labs(title = "Are pre-school even distributed in Singapore?",
+       subtitle= "There are many planning sub-zones with a single pre-school, on the other hand, \nthere are two planning sub-zones with at least 20 pre-schools",
+      x = "Pre-school density (per km sq)",
+      y = "Frequency")
+```
 
-2.  [Scatterplot]{.underline}
+### 7.2 Scatterplot
 
-    ```{r}
-    ggplot(data=mpsz3414, 
-           aes(x= as.numeric(`PreSch Density`), y= as.numeric(`PreSch Count`)))+
-      geom_point() +
-      labs(x = "Pre-school density (per km sq)",
-          y = "Pre-school count")
-    ```
+```{r}
+ggplot(data=mpsz3414, 
+       aes(x= as.numeric(`PreSch Density`), y= as.numeric(`PreSch Count`)))+
+  geom_point() +
+  labs(x = "Pre-school density (per km sq)",
+      y = "Pre-school count")
+```

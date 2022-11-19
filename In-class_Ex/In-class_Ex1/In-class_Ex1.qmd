@@ -1,0 +1,41 @@
+---
+title: "In-class Exercise 1"
+editor: visual
+---
+
+## Overview
+
+Hello
+
+## Getting Started
+
+The code chunk below will install and load tidyverse and sf packages.
+
+```{r}
+pacman::p_load(sf, tidyverse)
+```
+
+## Importing Geospatial Data
+
+### Importing polygon features
+
+This code chunk will import ESRI shapefile into R.
+
+```{r}
+mpsz <- st_read(dsn = "data/geospatial", 
+                  layer = "MP14_SUBZONE_WEB_PL")
+```
+
+### Importing polyline features
+
+```{r}
+cyclingpath = st_read(dsn = "data/geospatial", 
+                         layer = "CyclingPathGazette")
+```
+
+### Importing and transforming into projected coordinates system
+
+```{r}
+preschool = st_read("data/geospatial/pre-schools-location-kml.kml") %>%
+  st_transform(crs = 3414)
+```
