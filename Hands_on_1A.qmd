@@ -15,7 +15,7 @@ pacman::p_load(sf, tidyverse)
 
 ## 2. Data Acquisition
 
-### 1.1 Importing polygon feature data in shapefile format
+### 2.1 Importing polygon feature data in shapefile format
 
 This code chunk will import ESRI shapefile into R.
 
@@ -25,7 +25,7 @@ mpsz = st_read(dsn = "Hands-on_Ex1/data/geospatial", layer = "MP14_SUBZONE_WEB_P
 
 The message above reveals that the geospatial objects are multipolygon features. There are a total of 323 multipolygon features and 15 fields in `mpsz` simple feature data frame. `mpsz` is in **svy21** projected coordinates systems. The bounding box provides the x extend and y extend of the data.
 
-### 1.2 Importing polyline feature data in shapefile format
+### 2.2 Importing polyline feature data in shapefile format
 
 ```{r}
 cyclingpath = st_read(dsn = "Hands-on_Ex1/data/geospatial", 
@@ -34,7 +34,7 @@ cyclingpath = st_read(dsn = "Hands-on_Ex1/data/geospatial",
 
 The message above reveals that there are a total of 1625 features and 2 fields in `cyclingpath` linestring feature data frame and it is in **svy21** projected coordinates system too.
 
-### 1.3 Importing GIS data in kml format
+### 2.3 Importing GIS data in kml format
 
 ```{r}
 preschool = st_read("Hands-on_Ex1/data/geospatial/pre-schools-location-kml.kml")
@@ -42,11 +42,11 @@ preschool = st_read("Hands-on_Ex1/data/geospatial/pre-schools-location-kml.kml")
 
 The message above reveals that `preschool` is a point feature data frame. There are a total of 1359 features and 2 fields. Different from the previous two simple feature data frame, preschool is in **wgs84** coordinates system.
 
-## 2. Checking the Content of A Simple Feature Data Frame
+## 3. Checking the Content of A Simple Feature Data Frame
 
 This sub-section will show different ways to retrieve information related to the content of a simple feature data frame.
 
-### 2.1 Working with st_geometry()
+### 3.1 Working with st_geometry()
 
 ```{r}
 st_geometry(mpsz)
@@ -54,7 +54,7 @@ st_geometry(mpsz)
 
 Notice that the print only displays basic information of the feature class such as type of geometry, the geographic extent of the features and the coordinate system of the data.
 
-### 2.2 Working with glimpse()
+### 3.2 Working with glimpse()
 
 ```{r}
 glimpse(mpsz)
@@ -62,7 +62,7 @@ glimpse(mpsz)
 
 *glimpse()* report reveals the data type of each fields. For example `FMEL-UPD_D` field is in **date** data type and `X_ADDR`, `Y_ADDR`, `SHAPE_L` and `SHAPE_AREA` fields are all in **double-precision values**.
 
-### 2.3 Working with head()
+### 3.3 Working with head()
 
 ```{r}
 head(mpsz, n=5)
@@ -70,7 +70,7 @@ head(mpsz, n=5)
 
 head() reveals complete information of a feature object, for the first 5 rows in the data.
 
-## 3. Plotting the Geospatial data
+## 4. Plotting the Geospatial data
 
 ```{r}
 plot(mpsz)
@@ -90,17 +90,17 @@ plot(mpsz["PLN_AREA_N"])
 
 To plot the sf object by using a specific attribute.
 
-## 4. Working with Projection
+## 5. Working with Projection
 
 This section will show how to project a simple feature data frame from one coordinate system to another coordinate system. This is also known as **projection transformation**.
 
-### 4.1 Assigning EPSG code to a simple feature data frame
+### 5.1 Assigning EPSG code to a simple feature data frame
 
 ```{r}
 st_crs(mpsz)
 ```
 
-### 4.2 Assigning correct EPSG code to mpsz dataframe
+### 5.2 Assigning correct EPSG code to mpsz dataframe
 
 In geospatial analytics, it is very common for us to transform the original data from geographic coordinate system to projected coordinate system. This is because geographic coordinate system is not appropriate if the analysis need to use distance or/and area measurements.
 
@@ -112,13 +112,13 @@ mpsz3414 <- st_transform(mpsz, 3414)
 st_crs(mpsz3414)
 ```
 
-### 4.3 Transforming the projection of preschool from wgs84 to svy21
+### 5.3 Transforming the projection of preschool from wgs84 to svy21
 
 ```{r}
 st_geometry(preschool)
 ```
 
-### 4.4 Performing project transformation using code change
+### 5.4 Performing project transformation using code change
 
 ```{r}
 preschool3414 <- st_transform(preschool, 
@@ -129,11 +129,11 @@ preschool3414 <- st_transform(preschool,
 st_geometry(preschool3414)
 ```
 
-## 5. Importing and converting An Aspatial Data
+## 6. Importing and converting An Aspatial Data
 
 Since `listings` data set is in csv file format, we will use [*read_csv()*](https://readr.tidyverse.org/reference/read_delim.html) of **readr** package to import `listing.csv` as shown the code chunk below. The output R object is called `listings` and it is a [tibble data frame](https://r4ds.had.co.nz/tibbles.html).
 
-### 5.1 Importing the aspatial data
+### 6.1 Importing the aspatial data
 
 ```{r}
 listings <- read_csv("Hands-on_Ex1/data/aspatial/listings.csv")
@@ -143,7 +143,7 @@ listings <- read_csv("Hands-on_Ex1/data/aspatial/listings.csv")
 list(listings) 
 ```
 
-### 5.2 Creating a simple feature dataframe from an aspatial dataframe
+### 6.2 Creating a simple feature dataframe from an aspatial dataframe
 
 The code chunk below converts `listing` data frame into a simple feature data frame by using [*st_as_sf()*](https://r-spatial.github.io/sf/reference/st_as_sf.html) of **sf** packages
 
@@ -158,7 +158,7 @@ Things to learn from the arguments above:
 
 -   *coords* argument requires you to provide the column name of the x-coordinates first then followed by the column name of the y-coordinates.
 
--   *crs* argument requires you to provide the coordinates system in epsg format. [EPSG: 4326](https://epsg.io/4326) is wgs84 Geographic Coordinate System and [EPSG: 3414](https://epsg.io/3414) is Singapore SVY21 Projected Coordinate System. You can search for other country\'s epsg code by referring to [epsg.io](https://epsg.io/).
+-   *crs* argument requires you to provide the coordinates system in epsg format. [EPSG: 4326](https://epsg.io/4326) is wgs84 Geographic Coordinate System and [EPSG: 3414](https://epsg.io/3414) is Singapore SVY21 Projected Coordinate System. You can search for other country's epsg code by referring to [epsg.io](https://epsg.io/).
 
 -   *%\>%* is used to nest *st_transform()* to transform the newly created simple feature data frame into svy21 projected coordinates system.
 
@@ -166,11 +166,11 @@ Things to learn from the arguments above:
 glimpse(listings_sf)
 ```
 
-## 6. Geoprocessing with sf package
+## 7. Geoprocessing with sf package
 
 Besides providing functions to handling (i.e. importing, exporting, assigning projection, transforming projection etc) geospatial data, **sf** package also offers a wide range of geoprocessing (also known as GIS analysis) functions.
 
-### 6.1 Buffering
+### 7.1 Buffering
 
 Firstly, [*st_buffer()*](https://r-spatial.github.io/sf/reference/geos_unary.html) of **sf** package is used to compute the 5-meter buffers around cycling paths
 
@@ -191,7 +191,7 @@ Lastly, sum() of Base R will be used to derive the total land involved.
 sum(buffer_cycling$AREA)
 ```
 
-### 6.2 Point-in-polygon count
+### 7.2 Point-in-polygon count
 
 ```{r}
 mpsz3414$`PreSch Count`<- lengths(st_intersects(mpsz3414, preschool3414))
@@ -217,11 +217,11 @@ mpsz3414 <- mpsz3414 %>%
   mutate(`PreSch Density` = `PreSch Count`/Area * 1000000)
 ```
 
-## 7. Exploratory Data Analysis (EDA)
+## 8. Exploratory Data Analysis (EDA)
 
 In practice, many geospatial analytics start with Exploratory Data Analysis. In this section, you will learn how to use appropriate [ggplot2](https://ggplot2.tidyverse.org/) functions to create functional and yet truthful statistical graphs for EDA purposes.
 
-### 7.1 Histogram
+### 8.1 Histogram
 
 ```{r}
 hist(mpsz3414$`PreSch Density`)
@@ -239,7 +239,7 @@ ggplot(data=mpsz3414,
       y = "Frequency")
 ```
 
-### 7.2 Scatterplot
+### 8.2 Scatterplot
 
 ```{r}
 ggplot(data=mpsz3414, 

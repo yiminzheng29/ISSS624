@@ -126,13 +126,13 @@ qtm(mpsz_pop2020,
 
 Things to learn from the code chunk above:
 
--   *tmap_mode()* with \"plot\" option is used to produce a static map. For interactive mode, \"view\" option should be used.
+-   *tmap_mode()* with "plot" option is used to produce a static map. For interactive mode, "view" option should be used.
 
 -   *fill* argument is used to map the attribute (i.e. DEPENDENCY)
 
 ## 5. Creating a choropleth map by using *tmap*'s elements
 
-Despite its usefulness of drawing a choropleth map quickly and easily, the disadvantge of *qtm()* is that it makes aesthetics of individual layers harder to control. To draw a high quality cartographic choropleth map as shown in the figure below, **tmap**\'s drawing elements should be used.
+Despite its usefulness of drawing a choropleth map quickly and easily, the disadvantge of *qtm()* is that it makes aesthetics of individual layers harder to control. To draw a high quality cartographic choropleth map as shown in the figure below, **tmap**'s drawing elements should be used.
 
 ```{r}
 tm_shape(mpsz_pop2020)+
@@ -174,7 +174,7 @@ tm_shape(mpsz_pop2020)+
 
 Things to learn from *tm_polygons()*:
 
--   The default interval binning used to draw the choropleth map is called \"pretty\". A detailed discussion of the data classification methods supported by **tmap** will be provided in sub-section 4.3.
+-   The default interval binning used to draw the choropleth map is called "pretty". A detailed discussion of the data classification methods supported by **tmap** will be provided in sub-section 4.3.
 
 -   The default colour scheme used is `YlOrRd` of ColorBrewer. You will learn more about the color scheme in sub-section 4.4.
 
@@ -212,7 +212,7 @@ Beside *alpha* argument, there are three other arguments for *tm_borders()*, the
 
 -   *lwd* = border line width. The default is 1, and
 
--   *lty* = border line type. The default is \"solid\".
+-   *lty* = border line type. The default is "solid".
 
 ## 6. Data classification methods of **tmap**
 
@@ -286,7 +286,7 @@ tm_shape(mpsz_pop2020)+
 
 Notice that the choropleth map is shaded in green.
 
-To reverse the colour shading, add a \"-\" prefix.
+To reverse the colour shading, add a "-" prefix.
 
 ```{r}
 tm_shape(mpsz_pop2020)+
