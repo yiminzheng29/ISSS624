@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>ISSS624 - In-class Exercise 1</title>
+<title>ISSS624 - Spatial Weights and Applications</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -183,7 +183,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview---spatial-weights-and-applications" id="toc-overview---spatial-weights-and-applications" class="nav-link active" data-scroll-target="#overview---spatial-weights-and-applications">Overview - Spatial Weights and Applications</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a></li>
   <li><a href="#getting-the-data-into-r-environment" id="toc-getting-the-data-into-r-environment" class="nav-link" data-scroll-target="#getting-the-data-into-r-environment">1. Getting the Data into R environment</a>
   <ul class="collapse">
@@ -223,7 +223,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">In-class Exercise 1</h1>
+<h1 class="title">Spatial Weights and Applications</h1>
 </div>
 
 
@@ -237,8 +237,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="overview---spatial-weights-and-applications" class="level2">
-<h2 class="anchored" data-anchor-id="overview---spatial-weights-and-applications">Overview - Spatial Weights and Applications</h2>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <p>This exercise will show how you can compute spatial weights using R.</p>
 </section>
 <section id="getting-started" class="level2">
@@ -313,7 +313,7 @@ Geodetic CRS:  WGS 84</code></pre>
 </section>
 <section id="importing-csv-file-into-r-environment" class="level3">
 <h3 class="anchored" data-anchor-id="importing-csv-file-into-r-environment">1.2 Importing csv file into r environment</h3>
-<p>Next, we will import <em>Hunan_2012.csv</em> into R by using <em>read_csv()</em> of <strong>readr</strong> package. The output is R dataframe class.</p>
+<p>Next, the <em>Hunan_2012.csv</em> file will be imported into R by using <em>read_csv()</em> of <strong>readr</strong> package. The output is R dataframe class.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>hunan2012 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/aspatial/Hunan_2012.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
