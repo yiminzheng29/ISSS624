@@ -1,4 +1,6 @@
 ---
 title: "Take-home Exercise 1: Geospatial Analytics for Social Good"
+author: "Zheng Yimin"
+date: "11/21/2022"
 editor: visual
 ---

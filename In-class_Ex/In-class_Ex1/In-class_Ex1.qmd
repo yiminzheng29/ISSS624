@@ -1,5 +1,7 @@
 ---
-title: "Spatial Weights and Applications"
+title: "In-class Exercise 1: Spatial Weights and Applications"
+author: "Zheng Yimin"
+date: "11/19/2022"
 editor: visual
 ---
 
@@ -38,7 +40,7 @@ hunan2012 <- read_csv("data/aspatial/Hunan_2012.csv")
 
 ### 1.3 Performing relational join
 
-The code chunk below will be used to update the attribute table of *hunan*\'s SpatialPolygonsDataFrame with the attribute fields of *hunan2012* dataframe. This is performed by using *left_join()* of **dplyr** package.
+The code chunk below will be used to update the attribute table of *hunan*'s SpatialPolygonsDataFrame with the attribute fields of *hunan2012* dataframe. This is performed by using *left_join()* of **dplyr** package.
 
 ```{r}
 hunan <- left_join(hunan,hunan2012)
@@ -59,7 +61,7 @@ tmap_arrange(basemap, gdppc, asp=1, ncol=2)
 
 ## 3. Computing Contiguity Spatial Weights
 
-In this section, you will learn how to use [*poly2nb()*](https://r-spatial.github.io/spdep/reference/poly2nb.html) of **spdep** package to compute contiguity weight matrices for the study area. This function builds a neighbours list based on regions with contiguous boundaries. If you look at the documentation you will see that you can pass a \"queen\" argument that takes TRUE or FALSE as options. If you do not specify this argument the default is set to TRUE, that is, if you don\'t specify queen = FALSE this function will return a list of first order neighbours using the Queen criteria.
+In this section, you will learn how to use [*poly2nb()*](https://r-spatial.github.io/spdep/reference/poly2nb.html) of **spdep** package to compute contiguity weight matrices for the study area. This function builds a neighbours list based on regions with contiguous boundaries. If you look at the documentation you will see that you can pass a "queen" argument that takes TRUE or FALSE as options. If you do not specify this argument the default is set to TRUE, that is, if you don't specify queen = FALSE this function will return a list of first order neighbours using the Queen criteria.
 
 ### 3.1 Computing (QUEEN) contiguity based neighbours
 
@@ -102,7 +104,7 @@ nb1 <- hunan$GDPPC[nb1]
 nb1
 ```
 
-The printed output above shows that the GDPPC of the five nearest neighbours based on Queen\'s method are 20981, 34592, 24473, 21311 and 22879 respectively.
+The printed output above shows that the GDPPC of the five nearest neighbours based on Queen's method are 20981, 34592, 24473, 21311 and 22879 respectively.
 
 You can display the complete weight matrix by using *str()*.
 
@@ -209,7 +211,7 @@ wm_d62 <- dnearneigh(coords, 0, 62, longlat = TRUE)
 wm_d62
 ```
 
-**Quiz:** What is the meaning of \"Average number of links: 3.681818\" shown above?
+**Quiz:** What is the meaning of "Average number of links: 3.681818" shown above?
 
 *\--\> It measures that on average, the number of neighbours satisfying the distance criteria defined in the above formula. This would mean the number of neighbours of region points by Euclidean distance in the metric that fulfills the lower bound of 0 and the upper bounds of 62, with longlat as TRUE.*
 
@@ -306,7 +308,7 @@ ids
 
 ### 5.1 Row-standardised weights matrix
 
-Next, we need to assign weights to each neighboring polygon. In our case, each neighboring polygon will be assigned equal weight (style=\"W\"). This is accomplished by assigning the fraction 1/(#ofneighbors) to each neighboring county then summing the weighted income values. While this is the most intuitive way to summaries the neighbors\' values it has one drawback in that polygons along the edges of the study area will base their lagged values on fewer polygons thus potentially over- or under-estimating the true nature of the spatial autocorrelation in the data. For this example, we\'ll stick with the style=\"W\" option for simplicity\'s sake but note that other more robust options are available, notably style=\"B\".
+Next, we need to assign weights to each neighboring polygon. In our case, each neighboring polygon will be assigned equal weight (style="W"). This is accomplished by assigning the fraction 1/(#ofneighbors) to each neighboring county then summing the weighted income values. While this is the most intuitive way to summaries the neighbors' values it has one drawback in that polygons along the edges of the study area will base their lagged values on fewer polygons thus potentially over- or under-estimating the true nature of the spatial autocorrelation in the data. For this example, we'll stick with the style="W" option for simplicity's sake but note that other more robust options are available, notably style="B".
 
 ```{r}
 rswm_q <- nb2listw(wm_q, style="W", zero.policy = TRUE)
@@ -315,13 +317,13 @@ rswm_q
 
 The zero.policy=TRUE option allows for lists of non-neighbors. This should be used with caution since the user may not be aware of missing neighbors in their dataset however, a zero.policy of FALSE would return an error.
 
-To see the weight of the first polygon\'s four neighbors type:
+To see the weight of the first polygon's four neighbors type:
 
 ```{r}
 rswm_q$weights[10]
 ```
 
-Each neighbor is assigned a 0.2 of the total weight. This means that when R computes the average neighboring income values, each neighbor\'s income will be multiplied by 0.2 before being tallied.
+Each neighbor is assigned a 0.2 of the total weight. This means that when R computes the average neighboring income values, each neighbor's income will be multiplied by 0.2 before being tallied.
 
 Using the same method, we can also derive a row standardised distance weight matrix by using the code chunk below.
 
@@ -350,7 +352,7 @@ In this section, you will learn how to create four different spatial lagged vari
 
 ### 6.1 Spatial lag with row-standardized weights
 
-Finally, we\'ll compute the average neighbor GDPPC value for each polygon. These values are often referred to as **spatially lagged values**.
+Finally, we'll compute the average neighbor GDPPC value for each polygon. These values are often referred to as **spatially lagged values**.
 
 ```{r}
 GDPPC.lag <- lag.listw(rswm_q, hunan$GDPPC)

@@ -1,5 +1,7 @@
 ---
-title: "Choropleth Mapping with R"
+title: "Hands-on Exercise 1.2: Choropleth Mapping with R"
+author: "Zheng Yimin"
+date: "11/18/2022"
 editor: visual
 ---
 

@@ -1,5 +1,7 @@
 ---
-title: "Geospatial Data Wrangling with R"
+title: "Hands-on Exercise 1.1: Geospatial Data Wrangling with R"
+author: "Zheng Yimin"
+date: "11/18/2022"
 editor: visual
 ---
 

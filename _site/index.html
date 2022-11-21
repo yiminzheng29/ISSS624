@@ -70,9 +70,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: [{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-author',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
       
-      searchColumns: [],
+      searchColumns: ["listing-date","listing-title","listing-author"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -188,10 +188,106 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-
+<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
+<div class="listing-actions-group">
+   <div class="input-group input-group-sm quarto-listing-sort">
+     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
+     <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+       <option value="" disabled="" selected="" hidden="">Order By</option>
+       <option value="index" data-direction="asc">Default</option>
+         <option value="listing-date-sort" data-direction="asc">
+          Date - Oldest
+        </option>
+         <option value="listing-date-sort" data-direction="desc">
+          Date - Newest
+        </option>
+         <option value="listing-title-sort" data-direction="asc">
+          Title
+        </option>
+         <option value="listing-author" data-direction="asc">
+          Author
+        </option>
+     </select>
+  </div>
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Filter">
+    </div>
 </div>
+
+<table class="quarto-listing-table table">
+<thead>
+<tr>
+<th>
+<a class="sort" data-sort="listing-date-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Date</a>
+</th>
+<th>
+<a class="sort" data-sort="listing-title-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Title</a>
+</th>
+<th>
+<a class="sort" data-sort="listing-author" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Author</a>
+</th>
+</tr>
+</thead>
+<tbody class="list">
+<tr data-index="0" data-listing-date-sort="1668700800000" data-listing-file-modified-sort="1669025683206" data-listing-reading-time-sort="5.83" data-listing-title-sort="Hands-on Exercise 1.1: Geospatial Data Wrangling with R" data-listing-filename-sort="Hands_on_1A.qmd">
+<td class="listing-date">
+Nov 18, 2022
+</td>
+<td class="listing-title">
+<a href="./Hands_on_1A.html" class="title">Hands-on Exercise 1.1: Geospatial Data Wrangling with R</a>
+</td>
+<td class="listing-author">
+Zheng Yimin
+</td>
+</tr>
+<tr data-index="1" data-listing-date-sort="1668700800000" data-listing-file-modified-sort="1669025702862" data-listing-reading-time-sort="14.4" data-listing-title-sort="Hands-on Exercise 1.2: Choropleth Mapping with R" data-listing-filename-sort="Hands_on_1B.qmd">
+<td class="listing-date">
+Nov 18, 2022
+</td>
+<td class="listing-title">
+<a href="./Hands_on_1B.html" class="title">Hands-on Exercise 1.2: Choropleth Mapping with R</a>
+</td>
+<td class="listing-author">
+Zheng Yimin
+</td>
+</tr>
+<tr data-index="2" data-listing-date-sort="1668960000000" data-listing-file-modified-sort="1669025719232" data-listing-reading-time-sort="24.205" data-listing-title-sort="Hands-on Exercise 2: Global and Local Measures of Spatial Autocorrelation" data-listing-filename-sort="Hands-on_Ex2.qmd">
+<td class="listing-date">
+Nov 21, 2022
+</td>
+<td class="listing-title">
+<a href="./Hands-on_Ex/Hands-on_Ex2/Hands-on_Ex2.html" class="title">Hands-on Exercise 2: Global and Local Measures of Spatial Autocorrelation</a>
+</td>
+<td class="listing-author">
+Zheng Yimin
+</td>
+</tr>
+<tr data-index="3" data-listing-date-sort="1668787200000" data-listing-file-modified-sort="1669025746686" data-listing-reading-time-sort="13.18" data-listing-title-sort="In-class Exercise 1: Spatial Weights and Applications" data-listing-filename-sort="In-class_Ex1.qmd">
+<td class="listing-date">
+Nov 19, 2022
+</td>
+<td class="listing-title">
+<a href="./In-class_Ex/In-class_Ex1/In-class_Ex1.html" class="title">In-class Exercise 1: Spatial Weights and Applications</a>
+</td>
+<td class="listing-author">
+Zheng Yimin
+</td>
+</tr>
+<tr data-index="4" data-listing-date-sort="1668960000000" data-listing-file-modified-sort="1669025449318" data-listing-reading-time-sort="0.005" data-listing-title-sort="Take-home Exercise 1: Geospatial Analytics for Social Good" data-listing-filename-sort="Take-home_Ex1.qmd">
+<td class="listing-date">
+Nov 21, 2022
+</td>
+<td class="listing-title">
+<a href="./Take-home_Ex/Take-home_Ex1/Take-home_Ex1.html" class="title">Take-home Exercise 1: Geospatial Analytics for Social Good</a>
+</td>
+<td class="listing-author">
+Zheng Yimin
+</td>
+</tr>
+</tbody>
+
+</table>
 <div class="listing-no-matching d-none">
 No matching items
 </div>
