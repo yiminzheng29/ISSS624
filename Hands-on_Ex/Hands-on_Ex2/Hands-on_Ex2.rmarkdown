@@ -179,7 +179,7 @@ The input of *nb2listw()* must be an object of class **nb**. The syntax of the f
 
 In this section, you will learn how to perform Moran's I statistics testing by using [*moran.test()*](https://r-spatial.github.io/spdep/reference/moran.test.html) of **spdep**.
 
-### 4.4 Maron's I test
+### 4.4 Moran's I test
 
 The code chunk below performs Moran's I statistical testing using [*moran.test()*](https://r-spatial.github.io/spdep/reference/moran.test.html) of **spdep**.
 
@@ -212,7 +212,9 @@ bperm
 ```
 
 
-> Question: What statistical observation can you draw from the output above?
+> Question: What statistical conclusion can you draw from the output above?
+>
+> Similar to the conclusion above, the p-value is low (0.001) is unsurprising and further validates the fact that the values in the data are strongly clustered.
 
 #### 4.4.2 Visualising Monte Carlo Moran's I
 
@@ -243,9 +245,23 @@ abline(v=0,
 ```
 
 
-# Question: What statistical conclusion can you draw from the output above?
+> Question: What statistical observation can you draw from the output above?
+>
+> The histogram shows that the distribution of Moran I values possibly expected if the observations have been arranged in randomness. However, the observed statistic of 0.30075 falls way to the right of the distribution, suggesting that positive spatial autocorrelation is occurring and the values are clustered.
 
-# Question: Instead of using Base Graph to plot the values, plot the values by using ggplot2 package
+> Question: Instead of using Base Graph to plot the values, plot the values by using ggplot2 package
+
+
+```{r}
+bperm1 = as.data.frame(bperm$res) # change values into dataframe before ggplot is called
+
+ggplot(data=bperm1, 
+       aes(x=as.numeric(`bperm$res`))) + 
+  geom_histogram(bins=25, color="black", fill="lightpink") + 
+  labs(title= "ggplot histogram of bperm$res", x="Simulated Moran's I", y="Frequency") +
+  geom_vline(xintercept=0, color="red")
+```
+
 
 ### 4.5 Global Spatial Autocorrelation: Geary's
 
@@ -261,7 +277,9 @@ geary.test(hunan$GDPPC, listw=rswm_q)
 ```
 
 
-# Question: What statistical conclusion can you draw from the output above?
+> Question: What statistical conclusion can you draw from the output above?
+>
+> The Geary C statistic value of 0.6907223 (small c value since it is less than 1) shows that the values are clustered and the observations tend to be similar.
 
 #### 4.5.2 Computing Monte Carlo Geary's C
 
@@ -277,7 +295,9 @@ bperm
 ```
 
 
-# Question: What statistical conclusion can you draw from the output above?
+> Question: What statistical conclusion can you draw from the output above?
+>
+> A Geary C statistic value of 0.69072 similarly suggests that there is positive spatial autocorrelation since the value is lower than 1.
 
 #### 4.5.3 Visualising the Monte Carlo Geary's C
 
@@ -302,7 +322,9 @@ abline(v=1, col="red")
 ```
 
 
-# Question: What statistical conclusion can you draw from the output above?
+> Question: What statistical conclusion can you draw from the output above?
+>
+> The Geary C's statistic value of 0.6907 is to the way left of the distribution in the histogram, suggesting that positive spatial autocorrelation is occurring and the values are clustered.
 
 ## 5. Spatial Correlogram
 
@@ -332,7 +354,7 @@ print(MI_corr)
 ```
 
 
-# Question: What statistical conclusion can you draw from the output above?
+# Question: What statistical observation can you draw from the plot above?
 
 ### 5.2 Compute Geary's C correlogram and plot
 
@@ -624,7 +646,11 @@ tmap_arrange(gdppc, LISAmap, asp=1, ncol=2)
 ```
 
 
-# Question: What statistical observations can you draw from the LISA map above?
+> Question: What statistical observations can you draw from the LISA map above?
+>
+> The high-high clusters indicate positive autocorrelation for the county areas having adjacent high GDPPC values. This is similar for the low-low clusters which indicate positive autocorrelation for county areas having adjacent low values.
+>
+> The low-high clusters indicate negative correlation where these areas with low GDPPC values are surrounded by high GDPPC areas. This is also similar to the high-low clusters which indicate negative correlation where areas with high GDPPC values are surrounded by low GDPPC areas.
 
 ## 8. Hot Spot and Cold Spot Area Analysis
 
@@ -795,7 +821,11 @@ tmap_arrange(gdppc, Gimap, asp=1, ncol=2)
 ```
 
 
-# Question: What statistical observation can you draw from the Gi map above?
+> Question: What statistical observation can you draw from the Gi map above?
+>
+> The east and west regions of the Hunan province showed a clear divide in the choropleth map above. Areas shaded in pink/red represented areas with higher GDPPC whilst areas shaded in blue/pale blue seemed to be areas/counties with lower GDPPC.
+>
+> Citizens with higher GDPPC apparently resided in the eastern side of Hunan, whilst citizens with lower GDPPC resided in the western side of Hunan.
 
 ### 9.3 Gi statistics using adaptive distance
 
@@ -834,5 +864,7 @@ tmap_arrange(gdppc,
 ```
 
 
-# Question: What statistical observation can you draw from the Gi map above?
+> Question: What statistical observation can you draw from the Gi map above?
+>
+> Similar to the fixed weights results above, the map showed a even clearer divide between the east and west counties of the Hunan province. The east side of Hunan is covered with more pink/red areas as compared to the the Gi map under fixed weights. This validates the fact that citizens residing in the east side of the Hunan province had a distincively higher GDPPC than as opposed to residents in the west regions of the Hunan province.
 
