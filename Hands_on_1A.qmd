@@ -244,7 +244,10 @@ ggplot(data=mpsz3414,
 ```{r}
 ggplot(data=mpsz3414, 
        aes(x= as.numeric(`PreSch Density`), y= as.numeric(`PreSch Count`)))+
-  geom_point() +
-  labs(x = "Pre-school density (per km sq)",
+  geom_point() +    
+  coord_cartesian(xlim=c(0,40),
+                  ylim=c(0,40))+
+  labs(title = "Are there too many pre-schools in certain areas?", subtitle = "The relationship between the count and density should show if those \n with more pre-schools are too dense in an area or if those with less \n have room for more.",
+    x = "Pre-school density (per km sq)",
       y = "Pre-school count")
 ```
