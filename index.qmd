@@ -1,11 +1,11 @@
 ---
 title: "ISSS624 - Geospatial Analytics Applications"
+listing:
+  contents: posts
+  type: default
+  sort: "date"
 ---
 
 Welcome to ISSS624 Geospatial Analytics Applications!
 
 In this webpage, I am going to share with you my learning journey of geospatial analytics.
-
-```{r}
-1 + 1
-```
