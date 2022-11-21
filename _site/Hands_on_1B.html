@@ -160,6 +160,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>  
     </ul>
   </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercises" role="button" data-bs-toggle="dropdown" aria-expanded="false">Take-home Exercises</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercises">    
+        <li>
+    <a class="dropdown-item" href="./Take-home_Ex/Take-home_Ex1/Take-home_Ex1.html">
+ <span class="dropdown-text">Take-home Exercise 1</span></a>
+  </li>  
+    </ul>
+  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
@@ -428,14 +437,14 @@ dbl (2): Pop, Time
 </div>
 <p>Things to learn from the code chunk above:</p>
 <ul>
-<li><p><em>tmap_mode()</em> with "plot" option is used to produce a static map. For interactive mode, "view" option should be used.</p></li>
+<li><p><em>tmap_mode()</em> with “plot” option is used to produce a static map. For interactive mode, “view” option should be used.</p></li>
 <li><p><em>fill</em> argument is used to map the attribute (i.e.&nbsp;DEPENDENCY)</p></li>
 </ul>
 </section>
 </section>
 <section id="creating-a-choropleth-map-by-using-tmaps-elements" class="level2">
 <h2 class="anchored" data-anchor-id="creating-a-choropleth-map-by-using-tmaps-elements">5. Creating a choropleth map by using <em>tmap</em>’s elements</h2>
-<p>Despite its usefulness of drawing a choropleth map quickly and easily, the disadvantge of <em>qtm()</em> is that it makes aesthetics of individual layers harder to control. To draw a high quality cartographic choropleth map as shown in the figure below, <strong>tmap</strong>'s drawing elements should be used.</p>
+<p>Despite its usefulness of drawing a choropleth map quickly and easily, the disadvantge of <em>qtm()</em> is that it makes aesthetics of individual layers harder to control. To draw a high quality cartographic choropleth map as shown in the figure below, <strong>tmap</strong>’s drawing elements should be used.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(mpsz_pop2020)<span class="sc">+</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="st">"DEPENDENCY"</span>, </span>
@@ -481,7 +490,7 @@ dbl (2): Pop, Time
 </div>
 <p>Things to learn from <em>tm_polygons()</em>:</p>
 <ul>
-<li><p>The default interval binning used to draw the choropleth map is called "pretty". A detailed discussion of the data classification methods supported by <strong>tmap</strong> will be provided in sub-section 4.3.</p></li>
+<li><p>The default interval binning used to draw the choropleth map is called “pretty”. A detailed discussion of the data classification methods supported by <strong>tmap</strong> will be provided in sub-section 4.3.</p></li>
 <li><p>The default colour scheme used is <code>YlOrRd</code> of ColorBrewer. You will learn more about the color scheme in sub-section 4.4.</p></li>
 <li><p>By default, Missing value will be shaded in grey.</p></li>
 </ul>
@@ -514,7 +523,7 @@ Notice that light-gray border lines have been added on the choropleth map.</p>
 <ul>
 <li><p><em>col</em> = border colour,</p></li>
 <li><p><em>lwd</em> = border line width. The default is 1, and</p></li>
-<li><p><em>lty</em> = border line type. The default is "solid".</p></li>
+<li><p><em>lty</em> = border line type. The default is “solid”.</p></li>
 </ul>
 </section>
 </section>
@@ -594,7 +603,7 @@ Notice that light-gray border lines have been added on the choropleth map.</p>
 </div>
 </div>
 <p>Notice that the choropleth map is shaded in green.</p>
-<p>To reverse the colour shading, add a "-" prefix.</p>
+<p>To reverse the colour shading, add a “-” prefix.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(mpsz_pop2020)<span class="sc">+</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="st">"DEPENDENCY"</span>,</span>

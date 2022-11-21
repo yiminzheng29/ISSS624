@@ -1,0 +1,4 @@
+---
+title: "Take-home Exercise 1: Geospatial Analytics for Social Good"
+editor: visual
+---
