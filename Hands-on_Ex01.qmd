@@ -5,6 +5,6 @@ editor: visual
 
 ## Overview
 
-[Hands-on Exercise 1: Geospatial Data Wrangling with R](Hands_on_1A.html)
+[Hands-on Exercise 1.1: Geospatial Data Wrangling with R](Hands_on_1A.html)
 
-[Hands-on Exercise 2: Choropleth Mapping with R](Hands_on_1B.html)
+[Hands-on Exercise 1.2: Choropleth Mapping with R](Hands_on_1B.html)

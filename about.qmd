@@ -1,9 +1,19 @@
 ---
 title: "About"
+about:
+  template: jolla
+  image: profile.jpg
+  links:
+    - icon: linkedin
+      text: linkedin
+      href: https://www.linkedin.com/in/yimin-zheng-a22985b6/
+    - icon: github
+      text: Github
+      href: https://github.com/yiminzheng29
 ---
 
-About this site
+Hello, my name is Yimin and I am currently a postgraduate student in Singapore Management University (SMU), studying Masters of IT in Business (AI track).
 
-```{r}
-1 + 1
-```
+This site is created to record my learning journey on ISSS624 Geospatial Analytics Applications, taught by Professor. Kam Tin Seong.
+
+You may also wish to checkout my [Github Repository](https://github.com/yiminzheng29) on other projects that I have done in the past/doing currently.
