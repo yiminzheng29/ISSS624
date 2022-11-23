@@ -22,6 +22,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -103,15 +166,6 @@ ul.task-list li input[type="checkbox"] {
   </li>  
     </ul>
   </li>
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercises" role="button" data-bs-toggle="dropdown" aria-expanded="false">Take-home Exercises</a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercises">    
-        <li>
-    <a class="dropdown-item" href="../../Take-home_Ex/Take-home_Ex1/Take-home_Ex1.html">
- <span class="dropdown-text">Take-home Exercise 1</span></a>
-  </li>  
-    </ul>
-  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
@@ -131,7 +185,45 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">1. Overview</a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">2. Getting Started</a>
+  <ul class="collapse">
+  <li><a href="#the-issue" id="toc-the-issue" class="nav-link" data-scroll-target="#the-issue">2.1 The issue</a></li>
+  <li><a href="#objective" id="toc-objective" class="nav-link" data-scroll-target="#objective">2.2 Objective</a></li>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">2.3 The Data</a></li>
+  <li><a href="#setting-up-the-analytical-tools" id="toc-setting-up-the-analytical-tools" class="nav-link" data-scroll-target="#setting-up-the-analytical-tools">2.4 Setting up the analytical tools</a></li>
+  </ul></li>
+  <li><a href="#getting-the-data-into-r-environment" id="toc-getting-the-data-into-r-environment" class="nav-link" data-scroll-target="#getting-the-data-into-r-environment">3. Getting the Data into R Environment</a>
+  <ul class="collapse">
+  <li><a href="#importing-the-geospatial-data-into-r-environment" id="toc-importing-the-geospatial-data-into-r-environment" class="nav-link" data-scroll-target="#importing-the-geospatial-data-into-r-environment">3.1 Importing the geospatial data into R Environment</a></li>
+  <li><a href="#importing-the-aspatial-data-into-r-environment" id="toc-importing-the-aspatial-data-into-r-environment" class="nav-link" data-scroll-target="#importing-the-aspatial-data-into-r-environment">3.2 Importing the aspatial data into R Environment</a></li>
+  </ul></li>
+  <li><a href="#checking-the-content-of-the-imported-data" id="toc-checking-the-content-of-the-imported-data" class="nav-link" data-scroll-target="#checking-the-content-of-the-imported-data">4. Checking the content of the imported data</a>
+  <ul class="collapse">
+  <li><a href="#using-glimpse" id="toc-using-glimpse" class="nav-link" data-scroll-target="#using-glimpse">4.1 Using glimpse()</a></li>
+  </ul></li>
+  <li><a href="#working-with-projections" id="toc-working-with-projections" class="nav-link" data-scroll-target="#working-with-projections">5. Working with projections</a>
+  <ul class="collapse">
+  <li><a href="#assigning-epsg-code-to-geospatial-data" id="toc-assigning-epsg-code-to-geospatial-data" class="nav-link" data-scroll-target="#assigning-epsg-code-to-geospatial-data">5.1 Assigning EPSG code to geospatial data</a></li>
+  </ul></li>
+  <li><a href="#converting-the-aspatial-data" id="toc-converting-the-aspatial-data" class="nav-link" data-scroll-target="#converting-the-aspatial-data">6. Converting the aspatial data</a>
+  <ul class="collapse">
+  <li><a href="#creating-a-simple-feature-data-frame-from-an-aspatial-data-frame" id="toc-creating-a-simple-feature-data-frame-from-an-aspatial-data-frame" class="nav-link" data-scroll-target="#creating-a-simple-feature-data-frame-from-an-aspatial-data-frame">6.1 Creating a simple feature data frame from an aspatial data frame</a></li>
+  <li><a href="#performing-relational-join-on-the-geospatial-and-aspatial-data." id="toc-performing-relational-join-on-the-geospatial-and-aspatial-data." class="nav-link" data-scroll-target="#performing-relational-join-on-the-geospatial-and-aspatial-data.">4.3 Performing relational join on the geospatial and aspatial data.</a></li>
+  </ul></li>
+  <li><a href="#geoprocessing-with-the-sf-package" id="toc-geoprocessing-with-the-sf-package" class="nav-link" data-scroll-target="#geoprocessing-with-the-sf-package">7. Geoprocessing with the <strong>sf</strong> package</a>
+  <ul class="collapse">
+  <li><a href="#point-in-polygon-count" id="toc-point-in-polygon-count" class="nav-link" data-scroll-target="#point-in-polygon-count">7.1 Point-in-polygon count</a></li>
+  <li><a href="#point-in-polygon-to-identify-proportion-of-functional-non-functional-water-points-at-lga-levels" id="toc-point-in-polygon-to-identify-proportion-of-functional-non-functional-water-points-at-lga-levels" class="nav-link" data-scroll-target="#point-in-polygon-to-identify-proportion-of-functional-non-functional-water-points-at-lga-levels">7.2 Point-in-polygon to identify proportion of functional / non-functional water points at LGA levels</a></li>
+  </ul></li>
+  <li><a href="#global-spatial-autocorrelation" id="toc-global-spatial-autocorrelation" class="nav-link" data-scroll-target="#global-spatial-autocorrelation">8. Global Spatial Autocorrelation</a></li>
+  <li><a href="#cluster-and-outlier-analysis" id="toc-cluster-and-outlier-analysis" class="nav-link" data-scroll-target="#cluster-and-outlier-analysis">9. Cluster and Outlier Analysis</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -164,8 +256,548 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">1. Overview</h2>
+<p>In this exercise, we will use geospatial analytics to analyse spatial patterns of non-functional water points. We will be looking into <strong><em>Nigeria’s</em></strong> data for the purpose of this study. The below packages will be used for analysing and visualising the data:</p>
+<ul>
+<li><p>the <strong>spdep</strong> package will be used for computation of Global and Local Measure of Spatial Autocorrelation (GLSA). This includes:</p>
+<ul>
+<li><p>plotting of the Moran scatterplot</p></li>
+<li><p>computing and plotting the spatial correlogram by using appropriate functions within the package</p></li>
+<li><p>computing the Local Indicator of Spatial Association (LISA) statistics. Specific functions will be used for the computations</p></li>
+<li><p>computing the Getis-Ord’s Gi statistics to detect hot spot and/or cold spot areas by using appropriate functions within the package</p></li>
+</ul></li>
+<li><p>specific functions of the <strong>sf</strong> package will be used to import the geospatial data (shapefile format)</p></li>
+<li><p>specific functions of the <strong>readr</strong> package will be used to import the aspatial data (csv format)</p></li>
+<li><p>appropriate <strong>tidyr</strong> and <strong>dplyr</strong> methods will be used for deriving the proportion of functional and non-functional water point counts at Local Government Area (LGA) level.</p></li>
+<li><p>the <strong>tmap</strong> package will be used for visualisation of the analysis output, with respect to:</p>
+<ul>
+<li><p>plotting of maps to show the spatial distribution of functional and non-functional water point counts at LGA level (thematic mapping technique).</p></li>
+<li><p>plotting of hotspot areas and outliers/clusters maps of functional and non-functional water point counts at LGA level (analytical mapping technique).</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="getting-started" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started">2. Getting Started</h2>
+<section id="the-issue" class="level3">
+<h3 class="anchored" data-anchor-id="the-issue">2.1 The issue</h3>
+<p>Clean water is essential for survival, and thus is a valuable resource. However, over 40% of the global population still do not have access to sufficient clean water. This is especially common in the developing countries, where they are most affected by water shortages and poor water quality. Almost 80% of illnesses in the developing countries are caused by inadequacy of clean water and sanitation. This is especially prevalent in countries situated in the Africa continent.</p>
+<p>To counter the issue of providing clean and sustainable water to the developing countries, the <a href="https://www.waterpointdata.org/about/">Water Point Data Exchange (WPdx)</a> project is initiated. Its objective is to collect water point related data (based on <a href="https://www.waterpointdata.org/wp-content/uploads/2021/04/WPDx_Data_Standard.pdf">WPDx Data Standard</a>) from rural areas at the water point or small water scheme level, and publish the data on WPdx’s data repository. This repository is publicly accessible.</p>
+</section>
+<section id="objective" class="level3">
+<h3 class="anchored" data-anchor-id="objective">2.2 Objective</h3>
+<p>Hence, in this study, we are interested to examine the spatial patterns of water points in Nigeria, with particular focus on the Non Functional water points. Spatial Association techniques from various R packages will be used to develop our analysis.</p>
+</section>
+<section id="the-data" class="level3">
+<h3 class="anchored" data-anchor-id="the-data">2.3 The Data</h3>
+<p>Two sets of data will be used in this study.</p>
+<section id="geospatial" class="level4">
+<h4 class="anchored" data-anchor-id="geospatial">2.3.1 Geospatial</h4>
+<p>Nigeria Level-2 Administrative Boundary (also known as Local Government Area) polygon features GIS data, extracted from <a href="https://www.geoboundaries.org/">geoBoundaries</a> in <em>shapefile</em> format.</p>
+</section>
+<section id="aspatial" class="level4">
+<h4 class="anchored" data-anchor-id="aspatial">2.3.2 Aspatial</h4>
+<p>The WPdx+ data in <em>csv</em> format, extracted from <a href="https://www.waterpointdata.org/access-data/">WPdx Global Data Repositories</a>.</p>
+</section>
+</section>
+<section id="setting-up-the-analytical-tools" class="level3">
+<h3 class="anchored" data-anchor-id="setting-up-the-analytical-tools">2.4 Setting up the analytical tools</h3>
+<p>To ensure that the codes are properly run, the <strong>spdep</strong>, <strong>sf</strong>, <strong>tidyverse</strong> and <strong>tmap</strong> packages will need to be installed in R.</p>
+<ul>
+<li><p><strong>spdep</strong> will be used for computation of spatial weights, spatial autocorrelation statistics;</p></li>
+<li><p><strong>sf</strong> will be used for importing and handling of geospatial data in R;</p></li>
+<li><p><strong>tidyverse</strong> will be used for wrangling attribute data in R; and</p></li>
+<li><p><strong>tmap</strong> will be used to prepare for visualisation of analysis output.</p></li>
+</ul>
+<p>The code chunk below is used to create a package list containing the required R packages, and launching them into the R environment (assuming that these packages have already been installed in R).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(spdep, sf, tidyverse, tmap)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="getting-the-data-into-r-environment" class="level2">
+<h2 class="anchored" data-anchor-id="getting-the-data-into-r-environment">3. Getting the Data into R Environment</h2>
+<p>In this section, we will be importing the geospatial and aspatial data into the R environment.</p>
+<section id="importing-the-geospatial-data-into-r-environment" class="level3">
+<h3 class="anchored" data-anchor-id="importing-the-geospatial-data-into-r-environment">3.1 Importing the geospatial data into R Environment</h3>
+<p><a href="https://r-spatial.github.io/sf/reference/st_read.html"><em>st_read()</em></a> of sf package is used to import the data in ESRI shapefile format.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>nl2ab <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">"data/geospatial"</span>,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">layer =</span> <span class="st">"geoBoundaries-NGA-ADM2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `geoBoundaries-NGA-ADM2' from data source 
+  `/Users/Yimin/ISSS624/Take-home_Ex/Take-home_Ex1/data/geospatial' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 774 features and 5 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 2.668534 ymin: 4.273007 xmax: 14.67882 ymax: 13.89442
+Geodetic CRS:  WGS 84</code></pre>
+</div>
+</div>
+</section>
+<section id="importing-the-aspatial-data-into-r-environment" class="level3">
+<h3 class="anchored" data-anchor-id="importing-the-aspatial-data-into-r-environment">3.2 Importing the aspatial data into R Environment</h3>
+<p>Next, we will use the <em>read_csv()</em> method of <strong>readr</strong> package to import the csv file.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>nigeria <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/aspatial/nigeria.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: One or more parsing issues, call `problems()` on your data frame for details,
+e.g.:
+  dat &lt;- vroom(...)
+  problems(dat)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 95008 Columns: 70
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (38): #source, #report_date, #status_id, #water_source_clean, #water_sou...
+dbl (20): row_id, #lat_deg, #lon_deg, #install_year, #distance_to_primary_ro...
+lgl (12): #clean_adm3, #clean_adm4, #installer, #rehab_year, #rehabilitator,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="checking-the-content-of-the-imported-data" class="level2">
+<h2 class="anchored" data-anchor-id="checking-the-content-of-the-imported-data">4. Checking the content of the imported data</h2>
+<section id="using-glimpse" class="level3">
+<h3 class="anchored" data-anchor-id="using-glimpse">4.1 Using glimpse()</h3>
+<p><em>glimpse()</em> of the <strong>dplyr</strong> package allows us to have an overview of the attributes present in the geospatial data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(nl2ab)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 774
+Columns: 6
+$ shapeName  &lt;chr&gt; "Aba North", "Aba South", "Abadam", "Abaji", "Abak", "Abaka…
+$ Level      &lt;chr&gt; "ADM2", "ADM2", "ADM2", "ADM2", "ADM2", "ADM2", "ADM2", "AD…
+$ shapeID    &lt;chr&gt; "NGA-ADM2-72505758B79815894", "NGA-ADM2-72505758B67905963",…
+$ shapeGroup &lt;chr&gt; "NGA", "NGA", "NGA", "NGA", "NGA", "NGA", "NGA", "NGA", "NG…
+$ shapeType  &lt;chr&gt; "ADM2", "ADM2", "ADM2", "ADM2", "ADM2", "ADM2", "ADM2", "AD…
+$ geometry   &lt;MULTIPOLYGON [°]&gt; MULTIPOLYGON (((7.401109 5...., MULTIPOLYGON (…</code></pre>
+</div>
+</div>
+<p>From the output above, we can see that all the columns except the ‘geometry’ column are in “chr” data type. The ‘shapeName’ column features the various LGAs within Nigeria.</p>
+<p>The <em>st_crs()</em> of <strong>sf</strong> package can be used to identify the coordinate system used in the data set.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(nl2ab)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Coordinate Reference System:
+  User input: WGS 84 
+  wkt:
+GEOGCRS["WGS 84",
+    ENSEMBLE["World Geodetic System 1984 ensemble",
+        MEMBER["World Geodetic System 1984 (Transit)"],
+        MEMBER["World Geodetic System 1984 (G730)"],
+        MEMBER["World Geodetic System 1984 (G873)"],
+        MEMBER["World Geodetic System 1984 (G1150)"],
+        MEMBER["World Geodetic System 1984 (G1674)"],
+        MEMBER["World Geodetic System 1984 (G1762)"],
+        MEMBER["World Geodetic System 1984 (G2139)"],
+        ELLIPSOID["WGS 84",6378137,298.257223563,
+            LENGTHUNIT["metre",1]],
+        ENSEMBLEACCURACY[2.0]],
+    PRIMEM["Greenwich",0,
+        ANGLEUNIT["degree",0.0174532925199433]],
+    CS[ellipsoidal,2],
+        AXIS["geodetic latitude (Lat)",north,
+            ORDER[1],
+            ANGLEUNIT["degree",0.0174532925199433]],
+        AXIS["geodetic longitude (Lon)",east,
+            ORDER[2],
+            ANGLEUNIT["degree",0.0174532925199433]],
+    USAGE[
+        SCOPE["Horizontal component of 3D system."],
+        AREA["World."],
+        BBOX[-90,-180,90,180]],
+    ID["EPSG",4326]]</code></pre>
+</div>
+</div>
+<p>As seen above, the nl2ab data set is currently using WGS 84 (geographic) coordinate system. However, using WGS 84 may not be appropriate if the analysis needs to use distance and/or area measurements, which is required in this exercise.</p>
+<p>In point 5. (Working with projections), we aim to transform the coordinate system to Nigeria’s projected coordinate system.</p>
+<p>Next, let’s use <em>glimpse()</em> to take a look at nigeria’s data set.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(nigeria)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 95,008
+Columns: 70
+$ row_id                        &lt;dbl&gt; 429068, 222071, 160612, 160669, 160642, …
+$ `#source`                     &lt;chr&gt; "GRID3", "Federal Ministry of Water Reso…
+$ `#lat_deg`                    &lt;dbl&gt; 7.980000, 6.964532, 6.486940, 6.727570, …
+$ `#lon_deg`                    &lt;dbl&gt; 5.120000, 3.597668, 7.929720, 7.648670, …
+$ `#report_date`                &lt;chr&gt; "08/29/2018 12:00:00 AM", "08/16/2015 12…
+$ `#status_id`                  &lt;chr&gt; "Unknown", "Yes", "Yes", "Yes", "Yes", "…
+$ `#water_source_clean`         &lt;chr&gt; NA, "Borehole", "Borehole", "Borehole", …
+$ `#water_source_category`      &lt;chr&gt; NA, "Well", "Well", "Well", "Well", "Wel…
+$ `#water_tech_clean`           &lt;chr&gt; "Tapstand", "Mechanized Pump", "Hand Pum…
+$ `#water_tech_category`        &lt;chr&gt; "Tapstand", "Mechanized Pump", "Hand Pum…
+$ `#facility_type`              &lt;chr&gt; "Improved", "Improved", "Improved", "Imp…
+$ `#clean_country_name`         &lt;chr&gt; "Nigeria", "Nigeria", "Nigeria", "Nigeri…
+$ `#clean_adm1`                 &lt;chr&gt; "Ekiti", "Ogun", "Ebonyi", "Enugu", "Enu…
+$ `#clean_adm2`                 &lt;chr&gt; "Moba", "Obafemi-Owode", "Ohaukwu", "Isi…
+$ `#clean_adm3`                 &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ `#clean_adm4`                 &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ `#install_year`               &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, 2016, 2016, …
+$ `#installer`                  &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ `#rehab_year`                 &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ `#rehabilitator`              &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ `#management_clean`           &lt;chr&gt; NA, "Other", NA, NA, NA, NA, NA, NA, NA,…
+$ `#status_clean`               &lt;chr&gt; NA, "Functional", NA, NA, NA, NA, NA, NA…
+$ `#pay`                        &lt;chr&gt; NA, "No", NA, NA, NA, NA, NA, NA, NA, NA…
+$ `#fecal_coliform_presence`    &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ `#fecal_coliform_value`       &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ `#subjective_quality`         &lt;chr&gt; NA, "Acceptable quality", NA, NA, NA, NA…
+$ `#activity_id`                &lt;chr&gt; "1a117ba2-5256-4801-874c-f7611a4499dd", …
+$ `#scheme_id`                  &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ `#wpdx_id`                    &lt;chr&gt; "6FV7X4JC+222", "6FR5XH7X+R37", "6FR9FWP…
+$ `#notes`                      &lt;chr&gt; "Tap Water", "Ajura", NA, NA, NA, NA, NA…
+$ `#orig_lnk`                   &lt;chr&gt; "https://nigeria.africageoportal.com/dat…
+$ `#photo_lnk`                  &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ `#country_id`                 &lt;chr&gt; "NG", "NG", "NG", "NG", "NG", "NG", "NG"…
+$ `#data_lnk`                   &lt;chr&gt; "https://catalog.waterpointdata.org/data…
+$ `#distance_to_primary_road`   &lt;dbl&gt; 767.3742, 13364.9005, 9492.7619, 9319.08…
+$ `#distance_to_secondary_road` &lt;dbl&gt; 921.79187, 48.87743, 4333.34279, 23276.3…
+$ `#distance_to_tertiary_road`  &lt;dbl&gt; 3146.733237, 4167.519068, 693.211204, 30…
+$ `#distance_to_city`           &lt;dbl&gt; 41049.944, 13898.649, 27381.922, 34823.6…
+$ `#distance_to_town`           &lt;dbl&gt; 959.365, 9405.783, 72060.118, 31665.447,…
+$ water_point_history           &lt;chr&gt; "{\"2018-08-29\": {\"source\": \"GRID3\"…
+$ rehab_priority                &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ water_point_population        &lt;dbl&gt; NA, 140, 0, 492, 868, 81, 0, 9969, 933, …
+$ local_population_1km          &lt;dbl&gt; NA, 887, 0, 492, 1919, 81, 0, 13740, 933…
+$ crucialness_score             &lt;dbl&gt; NA, 0.1578354, NA, 1.0000000, 0.4523189,…
+$ pressure_score                &lt;dbl&gt; NA, 0.1400000, NA, 1.6400000, 2.8933333,…
+$ usage_capacity                &lt;dbl&gt; 250, 1000, 300, 300, 300, 300, 300, 1000…
+$ is_urban                      &lt;lgl&gt; TRUE, FALSE, FALSE, FALSE, FALSE, FALSE,…
+$ days_since_report             &lt;dbl&gt; 1483, 2592, 655, 655, 655, 655, 655, 217…
+$ staleness_score               &lt;dbl&gt; 62.65911, 44.17405, 81.34550, 81.34550, …
+$ latest_record                 &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE…
+$ location_id                   &lt;dbl&gt; 358773, 264633, 397972, 397984, 397982, …
+$ cluster_size                  &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+$ `#clean_country_id`           &lt;chr&gt; "NGA", "NGA", "NGA", "NGA", "NGA", "NGA"…
+$ `#country_name`               &lt;chr&gt; "Nigeria", "Nigeria", "Nigeria", "Nigeri…
+$ `#water_source`               &lt;chr&gt; "Tap", "Improved Tube well or borehole",…
+$ `#water_tech`                 &lt;chr&gt; NA, "Motorised", NA, NA, NA, NA, NA, "Su…
+$ `#status`                     &lt;chr&gt; NA, "Functional (and in use)", NA, NA, N…
+$ `#adm2`                       &lt;chr&gt; NA, "Obafemi-Owode", NA, NA, NA, NA, NA,…
+$ `#adm3`                       &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ `#management`                 &lt;chr&gt; NA, "Other", NA, NA, NA, NA, NA, NA, NA,…
+$ `#adm1`                       &lt;chr&gt; NA, "Ogun", "Enugu", "Enugu", "Enugu", "…
+$ `New Georeferenced Column`    &lt;chr&gt; "POINT (5.12 7.98)", "POINT (3.5976683 6…
+$ lat_deg_original              &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ lat_lon_deg                   &lt;chr&gt; "(7.98°, 5.12°)", "(6.9645317°, 3.597668…
+$ lon_deg_original              &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ public_data_source            &lt;chr&gt; "https://catalog.waterpointdata.org/data…
+$ converted                     &lt;chr&gt; NA, "#status_id, #water_source, #pay, #s…
+$ count                         &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+$ created_timestamp             &lt;chr&gt; "12/6/21 21:12", "06/30/2020 12:56:07 PM…
+$ updated_timestamp             &lt;chr&gt; "12/6/21 21:12", "06/30/2020 12:56:07 PM…</code></pre>
+</div>
+</div>
+<p>The nigeria dataset imported shows a comprehensive list of information. We can see that under the ‘clean_adm2’ column, it features the names of LGAs in Nigeria. In step 7, we will use geoprocessing methods from the sf package, to transform the nigeria data set into a simple feature data frame, with Nigeria’s projected coordinate system.</p>
+</section>
+</section>
+<section id="working-with-projections" class="level2">
+<h2 class="anchored" data-anchor-id="working-with-projections">5. Working with projections</h2>
+<p>Map projection is an important aspect of geospatial data, and to ensure proper analysis at later steps, all data sets used in this data will follow Nigeria’s projected coordinate system (EPSG 26391).</p>
+<section id="assigning-epsg-code-to-geospatial-data" class="level3">
+<h3 class="anchored" data-anchor-id="assigning-epsg-code-to-geospatial-data">5.1 Assigning EPSG code to geospatial data</h3>
+<p><em>st_transform()</em> of <strong>sf</strong> package is used to transform the geospatial data from WGS 84 coordinate system to EPSG 26391. We will use it to transform the nl2ab data set into Nigeria’s projected coordinate system.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>nl2ab26391 <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(nl2ab, <span class="at">crs=</span><span class="dv">26391</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="converting-the-aspatial-data" class="level2">
+<h2 class="anchored" data-anchor-id="converting-the-aspatial-data">6. Converting the aspatial data</h2>
+<section id="creating-a-simple-feature-data-frame-from-an-aspatial-data-frame" class="level3">
+<h3 class="anchored" data-anchor-id="creating-a-simple-feature-data-frame-from-an-aspatial-data-frame">6.1 Creating a simple feature data frame from an aspatial data frame</h3>
+<p>The code chunk below converts the nigeria data frame into a simple feature data frame. This is done by using <a href="https://r-spatial.github.io/sf/reference/st_as_sf.html"><em>st_as_sf()</em></a> of <strong>sf</strong> packages.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>nigeria26391 <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(nigeria, </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"#lon_deg"</span>, <span class="st">"#lat_deg"</span>),</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">crs=</span><span class="dv">4326</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs =</span> <span class="dv">26391</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The below arguments are passed to the <a href="https://r-spatial.github.io/sf/reference/st_as_sf.html"><em>st_as_sf()</em></a>in order to ensure that the data frame is in the output as required for this study.</p>
+<ul>
+<li><p><em>coords</em> –&gt; to provide the column name of the x-coordinates, followed by the column name of the y-coordinates</p></li>
+<li><p><em>crs</em> –&gt; to provide the coordinates system in epsg format. <a href="https://epsg.io/4326">EPSG: 4326</a> is wgs84 Geographic Coordinate System and <a href="https://epsg.io/26391">EPSG: 26391</a> is Nigeria’s SVY21 Projected Coordinate System.</p></li>
+<li><p><em>%&gt;%</em> –&gt; to transform the newly created simple data frame (nigeria_sf) into svy21 projected coordinates system.</p></li>
+</ul>
+<p>Now we will examine this newly created data frame using <em>glimpse()</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(nigeria26391)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 95,008
+Columns: 69
+$ row_id                        &lt;dbl&gt; 429068, 222071, 160612, 160669, 160642, …
+$ `#source`                     &lt;chr&gt; "GRID3", "Federal Ministry of Water Reso…
+$ `#report_date`                &lt;chr&gt; "08/29/2018 12:00:00 AM", "08/16/2015 12…
+$ `#status_id`                  &lt;chr&gt; "Unknown", "Yes", "Yes", "Yes", "Yes", "…
+$ `#water_source_clean`         &lt;chr&gt; NA, "Borehole", "Borehole", "Borehole", …
+$ `#water_source_category`      &lt;chr&gt; NA, "Well", "Well", "Well", "Well", "Wel…
+$ `#water_tech_clean`           &lt;chr&gt; "Tapstand", "Mechanized Pump", "Hand Pum…
+$ `#water_tech_category`        &lt;chr&gt; "Tapstand", "Mechanized Pump", "Hand Pum…
+$ `#facility_type`              &lt;chr&gt; "Improved", "Improved", "Improved", "Imp…
+$ `#clean_country_name`         &lt;chr&gt; "Nigeria", "Nigeria", "Nigeria", "Nigeri…
+$ `#clean_adm1`                 &lt;chr&gt; "Ekiti", "Ogun", "Ebonyi", "Enugu", "Enu…
+$ `#clean_adm2`                 &lt;chr&gt; "Moba", "Obafemi-Owode", "Ohaukwu", "Isi…
+$ `#clean_adm3`                 &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ `#clean_adm4`                 &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ `#install_year`               &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, 2016, 2016, …
+$ `#installer`                  &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ `#rehab_year`                 &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ `#rehabilitator`              &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ `#management_clean`           &lt;chr&gt; NA, "Other", NA, NA, NA, NA, NA, NA, NA,…
+$ `#status_clean`               &lt;chr&gt; NA, "Functional", NA, NA, NA, NA, NA, NA…
+$ `#pay`                        &lt;chr&gt; NA, "No", NA, NA, NA, NA, NA, NA, NA, NA…
+$ `#fecal_coliform_presence`    &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ `#fecal_coliform_value`       &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ `#subjective_quality`         &lt;chr&gt; NA, "Acceptable quality", NA, NA, NA, NA…
+$ `#activity_id`                &lt;chr&gt; "1a117ba2-5256-4801-874c-f7611a4499dd", …
+$ `#scheme_id`                  &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ `#wpdx_id`                    &lt;chr&gt; "6FV7X4JC+222", "6FR5XH7X+R37", "6FR9FWP…
+$ `#notes`                      &lt;chr&gt; "Tap Water", "Ajura", NA, NA, NA, NA, NA…
+$ `#orig_lnk`                   &lt;chr&gt; "https://nigeria.africageoportal.com/dat…
+$ `#photo_lnk`                  &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ `#country_id`                 &lt;chr&gt; "NG", "NG", "NG", "NG", "NG", "NG", "NG"…
+$ `#data_lnk`                   &lt;chr&gt; "https://catalog.waterpointdata.org/data…
+$ `#distance_to_primary_road`   &lt;dbl&gt; 767.3742, 13364.9005, 9492.7619, 9319.08…
+$ `#distance_to_secondary_road` &lt;dbl&gt; 921.79187, 48.87743, 4333.34279, 23276.3…
+$ `#distance_to_tertiary_road`  &lt;dbl&gt; 3146.733237, 4167.519068, 693.211204, 30…
+$ `#distance_to_city`           &lt;dbl&gt; 41049.944, 13898.649, 27381.922, 34823.6…
+$ `#distance_to_town`           &lt;dbl&gt; 959.365, 9405.783, 72060.118, 31665.447,…
+$ water_point_history           &lt;chr&gt; "{\"2018-08-29\": {\"source\": \"GRID3\"…
+$ rehab_priority                &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ water_point_population        &lt;dbl&gt; NA, 140, 0, 492, 868, 81, 0, 9969, 933, …
+$ local_population_1km          &lt;dbl&gt; NA, 887, 0, 492, 1919, 81, 0, 13740, 933…
+$ crucialness_score             &lt;dbl&gt; NA, 0.1578354, NA, 1.0000000, 0.4523189,…
+$ pressure_score                &lt;dbl&gt; NA, 0.1400000, NA, 1.6400000, 2.8933333,…
+$ usage_capacity                &lt;dbl&gt; 250, 1000, 300, 300, 300, 300, 300, 1000…
+$ is_urban                      &lt;lgl&gt; TRUE, FALSE, FALSE, FALSE, FALSE, FALSE,…
+$ days_since_report             &lt;dbl&gt; 1483, 2592, 655, 655, 655, 655, 655, 217…
+$ staleness_score               &lt;dbl&gt; 62.65911, 44.17405, 81.34550, 81.34550, …
+$ latest_record                 &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE…
+$ location_id                   &lt;dbl&gt; 358773, 264633, 397972, 397984, 397982, …
+$ cluster_size                  &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+$ `#clean_country_id`           &lt;chr&gt; "NGA", "NGA", "NGA", "NGA", "NGA", "NGA"…
+$ `#country_name`               &lt;chr&gt; "Nigeria", "Nigeria", "Nigeria", "Nigeri…
+$ `#water_source`               &lt;chr&gt; "Tap", "Improved Tube well or borehole",…
+$ `#water_tech`                 &lt;chr&gt; NA, "Motorised", NA, NA, NA, NA, NA, "Su…
+$ `#status`                     &lt;chr&gt; NA, "Functional (and in use)", NA, NA, N…
+$ `#adm2`                       &lt;chr&gt; NA, "Obafemi-Owode", NA, NA, NA, NA, NA,…
+$ `#adm3`                       &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ `#management`                 &lt;chr&gt; NA, "Other", NA, NA, NA, NA, NA, NA, NA,…
+$ `#adm1`                       &lt;chr&gt; NA, "Ogun", "Enugu", "Enugu", "Enugu", "…
+$ `New Georeferenced Column`    &lt;chr&gt; "POINT (5.12 7.98)", "POINT (3.5976683 6…
+$ lat_deg_original              &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ lat_lon_deg                   &lt;chr&gt; "(7.98°, 5.12°)", "(6.9645317°, 3.597668…
+$ lon_deg_original              &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ public_data_source            &lt;chr&gt; "https://catalog.waterpointdata.org/data…
+$ converted                     &lt;chr&gt; NA, "#status_id, #water_source, #pay, #s…
+$ count                         &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+$ created_timestamp             &lt;chr&gt; "12/6/21 21:12", "06/30/2020 12:56:07 PM…
+$ updated_timestamp             &lt;chr&gt; "12/6/21 21:12", "06/30/2020 12:56:07 PM…
+$ geometry                      &lt;POINT [m]&gt; POINT (299162.4 439998.2), POINT (…</code></pre>
+</div>
+</div>
+<p>As we can see, a new column ‘geometry’ has been added into the data frame, whilst the ‘#lon_deg’ and ‘#lat_deg’ were dropped.</p>
+</section>
+<section id="performing-relational-join-on-the-geospatial-and-aspatial-data." class="level3">
+<h3 class="anchored" data-anchor-id="performing-relational-join-on-the-geospatial-and-aspatial-data.">4.3 Performing relational join on the geospatial and aspatial data.</h3>
+<p>Next, we will perform relational join on both the nl2ab and nigeria datasets using <em>left_join()</em> from the <strong>dplyr</strong> package, since they both have common LGAs in place. However, as both datasets refer to LGAs using different names, we will specify the column names to use <em>left-join()</em>, under the ‘by=’ argument.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># nl2ab &lt;- left_join(nl2ab,nigeria, by=c('shapeName'='#clean_adm2'))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="geoprocessing-with-the-sf-package" class="level2">
+<h2 class="anchored" data-anchor-id="geoprocessing-with-the-sf-package">7. Geoprocessing with the <strong>sf</strong> package</h2>
+<p>In this section, we will use the geoprocessing (GIS analysis) functions under the <strong>sf</strong> package, to perform point-in-polygon count.</p>
+<section id="point-in-polygon-count" class="level3">
+<h3 class="anchored" data-anchor-id="point-in-polygon-count">7.1 Point-in-polygon count</h3>
+<p>As we are required to compute the waterpoint counts at LGA levels for the purpose of this study, the code chunk below will be executed, using <a href="https://r-spatial.github.io/sf/reference/geos_binary_pred.html"><em>st_intersects()</em></a> and <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/length"><em>length()</em></a>. A new column named <code>WaterPtCounts</code> will be added to the <code>nl2ab26391</code> simple feature data frame, showing the water point counts at respective LGAs’.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>nl2ab26391<span class="sc">$</span><span class="st">'WaterPtCounts'</span> <span class="ot">&lt;-</span> <span class="fu">lengths</span>(<span class="fu">st_intersects</span>(nl2ab26391, nigeria26391))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We will then take a look at the summary statistics of the newly derived <code>WaterPtCounts</code> field by using <em>summary()</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nl2ab26391)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  shapeName            Level             shapeID           shapeGroup       
+ Length:774         Length:774         Length:774         Length:774        
+ Class :character   Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+                                                                            
+                                                                            
+                                                                            
+  shapeType                  geometry   WaterPtCounts  
+ Length:774         MULTIPOLYGON :774   Min.   :  0.0  
+ Class :character   epsg:26391   :  0   1st Qu.: 45.0  
+ Mode  :character   +proj=tmer...:  0   Median : 96.0  
+                                        Mean   :122.7  
+                                        3rd Qu.:168.8  
+                                        Max.   :894.0  </code></pre>
+</div>
+</div>
+</section>
+<section id="point-in-polygon-to-identify-proportion-of-functional-non-functional-water-points-at-lga-levels" class="level3">
+<h3 class="anchored" data-anchor-id="point-in-polygon-to-identify-proportion-of-functional-non-functional-water-points-at-lga-levels">7.2 Point-in-polygon to identify proportion of functional / non-functional water points at LGA levels</h3>
+<p>From step 4.1 (Using <em>glimpse()</em>), we can see that the <code>nigeria26391</code> data frame indicates if the water point is functional in the <code>#status_clean</code> column. Let’s use the <em>unique()</em> function to identify the words used to differentiate if the water point is functional or not.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(nigeria26391<span class="sc">$</span><span class="st">`</span><span class="at">#status_clean</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA                                 "Functional"                      
+[3] "Abandoned/Decommissioned"         "Non-Functional"                  
+[5] "Functional but not in use"        "Functional but needs repair"     
+[7] "Abandoned"                        "Non functional due to dry season"
+[9] "Non-Functional due to dry season"</code></pre>
+</div>
+</div>
+<p>From the above values, it seems clear that functional water points would start with the word “Functional”, and non-functional water points would start with the word “Non-Functional”/“Non functional”.</p>
+<p>Next, we will create one filtered data set showing only the functional water points.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>fn <span class="ot">=</span> nigeria26391 <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(<span class="st">`</span><span class="at">#status_clean</span><span class="st">`</span>, <span class="st">'^(Functional)'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We will then create another filtered data set showing only the non-functional water points.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>non_fn <span class="ot">=</span> nigeria26391 <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(<span class="st">`</span><span class="at">#status_clean</span><span class="st">`</span>, <span class="st">'^(Non-Functional|Non Functional)'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now that we have 2 new data sets <code>fn</code> and <code>non-fn</code>, we will use point-in polygon to compute the number of functional and non-functional water points at LGA levels.</p>
+<p>The <code>FunctionalWaterPtCounts</code> column is created to show functional water point counts at LGA levels.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>nl2ab26391<span class="sc">$</span><span class="st">'FunctionalWaterPtCounts'</span> <span class="ot">&lt;-</span> <span class="fu">lengths</span>(<span class="fu">st_intersects</span>(nl2ab26391, fn))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>NonFunctionalWaterPtCounts</code> column is created to show non-functional water point counts at LGA levels.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>nl2ab26391<span class="sc">$</span><span class="st">'NonFunctionalWaterPtCounts'</span> <span class="ot">&lt;-</span> <span class="fu">lengths</span>(<span class="fu">st_intersects</span>(nl2ab26391, non_fn))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s have a look to see if data is properly captured using glimpse().</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(nl2ab26391)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 774
+Columns: 9
+$ shapeName                  &lt;chr&gt; "Aba North", "Aba South", "Abadam", "Abaji"…
+$ Level                      &lt;chr&gt; "ADM2", "ADM2", "ADM2", "ADM2", "ADM2", "AD…
+$ shapeID                    &lt;chr&gt; "NGA-ADM2-72505758B79815894", "NGA-ADM2-725…
+$ shapeGroup                 &lt;chr&gt; "NGA", "NGA", "NGA", "NGA", "NGA", "NGA", "…
+$ shapeType                  &lt;chr&gt; "ADM2", "ADM2", "ADM2", "ADM2", "ADM2", "AD…
+$ geometry                   &lt;MULTIPOLYGON [m]&gt; MULTIPOLYGON (((552560.3 12...…
+$ WaterPtCounts              &lt;int&gt; 17, 71, 0, 57, 48, 233, 34, 119, 152, 66, 3…
+$ FunctionalWaterPtCounts    &lt;int&gt; 7, 29, 0, 23, 23, 82, 16, 72, 79, 18, 25, 5…
+$ NonFunctionalWaterPtCounts &lt;int&gt; 9, 33, 0, 34, 22, 42, 15, 33, 60, 25, 12, 7…</code></pre>
+</div>
+</div>
+<p>Now that we have the data properly captured, we shall use <em>mutate()</em> of <strong>dplyr</strong> package to compute the proportion of functional/non-functional water points at LGA levels.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>nl2ab26391 <span class="ot">&lt;-</span> nl2ab26391 <span class="sc">%&gt;%</span> </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">FunctionalWaterPtCounts</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">FunctionalWaterPtCounts</span><span class="st">`</span><span class="sc">/</span><span class="st">`</span><span class="at">WaterPtCounts</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>nl2ab26391 <span class="ot">&lt;-</span> nl2ab26391 <span class="sc">%&gt;%</span> </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">NonFunctionalWaterPtCounts</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">NonFunctionalWaterPtCounts</span><span class="st">`</span><span class="sc">/</span><span class="st">`</span><span class="at">WaterPtCounts</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s use <em>head()</em> to see see how the first 5 records have been captured in <code>nl2ab26391</code> data set.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(nl2ab26391)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 6 features and 8 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 481557.7 ymin: 98997.75 xmax: 1245549 ymax: 1092644
+Projected CRS: Minna / Nigeria West Belt
+  shapeName Level                    shapeID shapeGroup shapeType
+1 Aba North  ADM2 NGA-ADM2-72505758B79815894        NGA      ADM2
+2 Aba South  ADM2 NGA-ADM2-72505758B67905963        NGA      ADM2
+3    Abadam  ADM2 NGA-ADM2-72505758B57073987        NGA      ADM2
+4     Abaji  ADM2 NGA-ADM2-72505758B61968000        NGA      ADM2
+5      Abak  ADM2 NGA-ADM2-72505758B39432389        NGA      ADM2
+6 Abakaliki  ADM2 NGA-ADM2-72505758B36739173        NGA      ADM2
+                        geometry WaterPtCounts FunctionalWaterPtCounts
+1 MULTIPOLYGON (((552560.3 12...            17               0.4117647
+2 MULTIPOLYGON (((545153.6 12...            71               0.4084507
+3 MULTIPOLYGON (((1245549 106...             0                     NaN
+4 MULTIPOLYGON (((510602.3 57...            57               0.4035088
+5 MULTIPOLYGON (((598086 1218...            48               0.4791667
+6 MULTIPOLYGON (((663801.7 25...           233               0.3519313
+  NonFunctionalWaterPtCounts
+1                  0.5294118
+2                  0.4647887
+3                        NaN
+4                  0.5964912
+5                  0.4583333
+6                  0.1802575</code></pre>
+</div>
+</div>
+<p>We can see that some of the values under the <code>FunctionalWaterPtCounts</code> and <code>NonFunctionalWaterPtCounts</code> column are Nan, and this should be changed to 0 in order to avoid any errors in further processing of the data / analysis.</p>
+<p>We will use the code chunk below to change the Nan values.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>nl2ab26391[<span class="fu">is.na</span>(nl2ab26391)] <span class="ot">=</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="global-spatial-autocorrelation" class="level2">
+<h2 class="anchored" data-anchor-id="global-spatial-autocorrelation">8. Global Spatial Autocorrelation</h2>
+<p>Computing Contiguity Spatial Weights</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>wm_q <span class="ot">&lt;-</span> <span class="fu">poly2nb</span>(nl2ab26391,</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">queen =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(wm_q)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Neighbour list object:
+Number of regions: 774 
+Number of nonzero links: 4440 
+Percentage nonzero weights: 0.7411414 
+Average number of links: 5.736434 
+1 region with no links:
+86
+Link number distribution:
+
+  0   1   2   3   4   5   6   7   8   9  10  11  12  14 
+  1   2  14  57 125 182 140 122  72  41  12   4   1   1 
+2 least connected regions:
+138 560 with 1 link
+1 most connected region:
+508 with 14 links</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>rswm_q <span class="ot">&lt;-</span> <span class="fu">nb2listw</span>(wm_q,  </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">style =</span> <span class="st">"B"</span>,</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co"># print(rswm_q, zero.policy = TRUE)</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co"># zero.policy = TRUE is set at the back to prevent error from printing due to regions with no links.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="cluster-and-outlier-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="cluster-and-outlier-analysis">9. Cluster and Outlier Analysis</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>fips <span class="ot">&lt;-</span> <span class="fu">order</span>(nl2ab26391<span class="sc">$</span>NonFunctionalWaterPtCounts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>localMoranI <span class="ot">&lt;-</span> <span class="fu">localmoran</span>(nl2ab26391<span class="sc">$</span>NonFunctionalWaterPtCounts, </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>                          rswm_q, </span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(localMoranI)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        Ii         E.Ii     Var.Ii      Z.Ii Pr(z != E(Ii))
+1 2.013504 -0.003961724  3.0514335 1.1549259    0.248120752
+2 0.649135 -0.001206752  0.9312313 0.6739270    0.500357721
+3 8.926750 -0.011548189  8.8808245 2.9993574    0.002705497
+4 2.167410 -0.013136324 10.0695607 0.6871634    0.491979765
+5 3.046583 -0.001789059  1.3770637 2.5977118    0.009384724
+6 3.567780 -0.006385569  4.8995438 1.6147187    0.106371616</code></pre>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

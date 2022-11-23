@@ -4,3 +4,291 @@ author: "Zheng Yimin"
 date: "11/21/2022"
 editor: visual
 ---
+
+## 1. Overview
+
+In this exercise, we will use geospatial analytics to analyse spatial patterns of non-functional water points. We will be looking into ***Nigeria's*** data for the purpose of this study. The below packages will be used for analysing and visualising the data:
+
+-   the **spdep** package will be used for computation of Global and Local Measure of Spatial Autocorrelation (GLSA). This includes:
+
+    -   plotting of the Moran scatterplot
+
+    -   computing and plotting the spatial correlogram by using appropriate functions within the package
+
+    -   computing the Local Indicator of Spatial Association (LISA) statistics. Specific functions will be used for the computations
+
+    -   computing the Getis-Ord's Gi statistics to detect hot spot and/or cold spot areas by using appropriate functions within the package
+
+-   specific functions of the **sf** package will be used to import the geospatial data (shapefile format)
+
+-   specific functions of the **readr** package will be used to import the aspatial data (csv format)
+
+-   appropriate **tidyr** and **dplyr** methods will be used for deriving the proportion of functional and non-functional water point counts at Local Government Area (LGA) level.
+
+-   the **tmap** package will be used for visualisation of the analysis output, with respect to:
+
+    -   plotting of maps to show the spatial distribution of functional and non-functional water point counts at LGA level (thematic mapping technique).
+
+    -   plotting of hotspot areas and outliers/clusters maps of functional and non-functional water point counts at LGA level (analytical mapping technique).
+
+## 2. Getting Started
+
+### 2.1 The issue
+
+Clean water is essential for survival, and thus is a valuable resource. However, over 40% of the global population still do not have access to sufficient clean water. This is especially common in the developing countries, where they are most affected by water shortages and poor water quality. Almost 80% of illnesses in the developing countries are caused by inadequacy of clean water and sanitation. This is especially prevalent in countries situated in the Africa continent.
+
+To counter the issue of providing clean and sustainable water to the developing countries, the [Water Point Data Exchange (WPdx)](https://www.waterpointdata.org/about/) project is initiated. Its objective is to collect water point related data (based on [WPDx Data Standard](https://www.waterpointdata.org/wp-content/uploads/2021/04/WPDx_Data_Standard.pdf)) from rural areas at the water point or small water scheme level, and publish the data on WPdx's data repository. This repository is publicly accessible.
+
+### 2.2 Objective
+
+Hence, in this study, we are interested to examine the spatial patterns of water points in Nigeria, with particular focus on the Non Functional water points. Spatial Association techniques from various R packages will be used to develop our analysis.
+
+### 2.3 The Data
+
+Two sets of data will be used in this study.
+
+#### 2.3.1 Geospatial
+
+Nigeria Level-2 Administrative Boundary (also known as Local Government Area) polygon features GIS data, extracted from [geoBoundaries](https://www.geoboundaries.org/) in *shapefile* format.
+
+#### 2.3.2 Aspatial
+
+The WPdx+ data in *csv* format, extracted from [WPdx Global Data Repositories](https://www.waterpointdata.org/access-data/).
+
+### 2.4 Setting up the analytical tools
+
+To ensure that the codes are properly run, the **spdep**, **sf**, **tidyverse** and **tmap** packages will need to be installed in R.
+
+-   **spdep** will be used for computation of spatial weights, spatial autocorrelation statistics;
+
+-   **sf** will be used for importing and handling of geospatial data in R;
+
+-   **tidyverse** will be used for wrangling attribute data in R; and
+
+-   **tmap** will be used to prepare for visualisation of analysis output.
+
+The code chunk below is used to create a package list containing the required R packages, and launching them into the R environment (assuming that these packages have already been installed in R).
+
+```{r}
+pacman::p_load(spdep, sf, tidyverse, tmap)
+```
+
+## 3. Getting the Data into R Environment
+
+In this section, we will be importing the geospatial and aspatial data into the R environment.
+
+### 3.1 Importing the geospatial data into R Environment
+
+[*st_read()*](https://r-spatial.github.io/sf/reference/st_read.html) of sf package is used to import the data in ESRI shapefile format.
+
+```{r}
+nl2ab <- st_read(dsn = "data/geospatial",
+                 layer = "geoBoundaries-NGA-ADM2")
+```
+
+### 3.2 Importing the aspatial data into R Environment
+
+Next, we will use the *read_csv()* method of **readr** package to import the csv file.
+
+```{r}
+nigeria <- read_csv("data/aspatial/nigeria.csv")
+```
+
+## 4. Checking the content of the imported data
+
+### 4.1 Using glimpse()
+
+*glimpse()* of the **dplyr** package allows us to have an overview of the attributes present in the geospatial data.
+
+```{r}
+glimpse(nl2ab)
+```
+
+From the output above, we can see that all the columns except the 'geometry' column are in "chr" data type. The 'shapeName' column features the various LGAs within Nigeria.
+
+The *st_crs()* of **sf** package can be used to identify the coordinate system used in the data set.
+
+```{r}
+st_crs(nl2ab)
+```
+
+As seen above, the nl2ab data set is currently using WGS 84 (geographic) coordinate system. However, using WGS 84 may not be appropriate if the analysis needs to use distance and/or area measurements, which is required in this exercise.
+
+In point 5. (Working with projections), we aim to transform the coordinate system to Nigeria's projected coordinate system.
+
+Next, let's use *glimpse()* to take a look at nigeria's data set.
+
+```{r}
+glimpse(nigeria)
+```
+
+The nigeria dataset imported shows a comprehensive list of information. We can see that under the 'clean_adm2' column, it features the names of LGAs in Nigeria. In step 7, we will use geoprocessing methods from the sf package, to transform the nigeria data set into a simple feature data frame, with Nigeria's projected coordinate system.
+
+## 5. Working with projections
+
+Map projection is an important aspect of geospatial data, and to ensure proper analysis at later steps, all data sets used in this data will follow Nigeria's projected coordinate system (EPSG 26391).
+
+### 5.1 Assigning EPSG code to geospatial data
+
+*st_transform()* of **sf** package is used to transform the geospatial data from WGS 84 coordinate system to EPSG 26391. We will use it to transform the nl2ab data set into Nigeria's projected coordinate system.
+
+```{r}
+nl2ab26391 <- st_transform(nl2ab, crs=26391)
+```
+
+## 6. Converting the aspatial data 
+
+### 6.1 Creating a simple feature data frame from an aspatial data frame
+
+The code chunk below converts the nigeria data frame into a simple feature data frame. This is done by using [*st_as_sf()*](https://r-spatial.github.io/sf/reference/st_as_sf.html) of **sf** packages.
+
+```{r}
+nigeria26391 <- st_as_sf(nigeria, 
+                       coords = c("#lon_deg", "#lat_deg"),
+                       crs=4326) %>%
+  st_transform(crs = 26391)
+```
+
+The below arguments are passed to the [*st_as_sf()*](https://r-spatial.github.io/sf/reference/st_as_sf.html)in order to ensure that the data frame is in the output as required for this study.
+
+-   *coords* --\> to provide the column name of the x-coordinates, followed by the column name of the y-coordinates
+
+-   *crs* --\> to provide the coordinates system in epsg format. [EPSG: 4326](https://epsg.io/4326) is wgs84 Geographic Coordinate System and [EPSG: 26391](https://epsg.io/26391) is Nigeria's SVY21 Projected Coordinate System.
+
+-   *%\>%* --\> to transform the newly created simple data frame (nigeria_sf) into svy21 projected coordinates system.
+
+Now we will examine this newly created data frame using *glimpse()*.
+
+```{r}
+glimpse(nigeria26391)
+```
+
+As we can see, a new column 'geometry' has been added into the data frame, whilst the '#lon_deg' and '#lat_deg' were dropped.
+
+### 4.3  Performing relational join on the geospatial and aspatial data. 
+
+Next, we will perform relational join on both the nl2ab and nigeria datasets using *left_join()* from the **dplyr** package, since they both have common LGAs in place. However, as both datasets refer to LGAs using different names, we will specify the column names to use *left-join()*, under the 'by=' argument.
+
+```{r}
+# nl2ab <- left_join(nl2ab,nigeria, by=c('shapeName'='#clean_adm2'))
+```
+
+## 7. Geoprocessing with the **sf** package
+
+In this section, we will use the geoprocessing (GIS analysis) functions under the **sf** package, to perform point-in-polygon count.
+
+### 7.1 Point-in-polygon count
+
+As we are required to compute the waterpoint counts at LGA levels for the purpose of this study, the code chunk below will be executed, using [*st_intersects()*](https://r-spatial.github.io/sf/reference/geos_binary_pred.html) and [*length()*](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/length). A new column named `WaterPtCounts` will be added to the `nl2ab26391` simple feature data frame, showing the water point counts at respective LGAs'.
+
+```{r}
+nl2ab26391$'WaterPtCounts' <- lengths(st_intersects(nl2ab26391, nigeria26391))
+```
+
+We will then take a look at the summary statistics of the newly derived `WaterPtCounts` field by using *summary()*.
+
+```{r}
+summary(nl2ab26391)
+```
+
+### 7.2 Point-in-polygon to identify proportion of functional / non-functional water points at LGA levels
+
+From step 4.1 (Using *glimpse()*), we can see that the `nigeria26391` data frame indicates if the water point is functional in the `#status_clean` column. Let's use the *unique()* function to identify the words used to differentiate if the water point is functional or not.
+
+```{r}
+unique(nigeria26391$`#status_clean`)
+```
+
+From the above values, it seems clear that functional water points would start with the word "Functional", and non-functional water points would start with the word "Non-Functional"/"Non functional".
+
+Next, we will create one filtered data set showing only the functional water points.
+
+```{r}
+fn = nigeria26391 %>%
+  filter(str_detect(`#status_clean`, '^(Functional)'))
+```
+
+We will then create another filtered data set showing only the non-functional water points.
+
+```{r}
+non_fn = nigeria26391 %>%
+  filter(str_detect(`#status_clean`, '^(Non-Functional|Non Functional)'))
+```
+
+Now that we have 2 new data sets `fn` and `non-fn`, we will use point-in polygon to compute the number of functional and non-functional water points at LGA levels.
+
+The `FunctionalWaterPtCounts` column is created to show functional water point counts at LGA levels.
+
+```{r}
+nl2ab26391$'FunctionalWaterPtCounts' <- lengths(st_intersects(nl2ab26391, fn))
+```
+
+The `NonFunctionalWaterPtCounts` column is created to show non-functional water point counts at LGA levels.
+
+```{r}
+nl2ab26391$'NonFunctionalWaterPtCounts' <- lengths(st_intersects(nl2ab26391, non_fn))
+```
+
+Let's have a look to see if data is properly captured using glimpse().
+
+```{r}
+glimpse(nl2ab26391)
+```
+
+Now that we have the data properly captured, we shall use *mutate()* of **dplyr** package to compute the proportion of functional/non-functional water points at LGA levels.
+
+```{r}
+nl2ab26391 <- nl2ab26391 %>% 
+  mutate(`FunctionalWaterPtCounts` = `FunctionalWaterPtCounts`/`WaterPtCounts`)
+```
+
+```{r}
+nl2ab26391 <- nl2ab26391 %>% 
+  mutate(`NonFunctionalWaterPtCounts` = `NonFunctionalWaterPtCounts`/`WaterPtCounts`)
+```
+
+Let's use *head()* to see see how the first 5 records have been captured in `nl2ab26391` data set.
+
+```{r}
+head(nl2ab26391)
+```
+
+We can see that some of the values under the `FunctionalWaterPtCounts` and `NonFunctionalWaterPtCounts` column are Nan, and this should be changed to 0 in order to avoid any errors in further processing of the data / analysis.
+
+We will use the code chunk below to change the Nan values.
+
+```{r}
+nl2ab26391[is.na(nl2ab26391)] = 0
+```
+
+## 8. Global Spatial Autocorrelation
+
+Computing Contiguity Spatial Weights
+
+```{r}
+wm_q <- poly2nb(nl2ab26391,
+                queen = TRUE)
+
+summary(wm_q)
+```
+
+```{r}
+rswm_q <- nb2listw(wm_q,  
+               style = "B",
+               zero.policy = TRUE)
+# print(rswm_q, zero.policy = TRUE)
+# zero.policy = TRUE is set at the back to prevent error from printing due to regions with no links.
+```
+
+## 9. Cluster and Outlier Analysis
+
+```{r}
+fips <- order(nl2ab26391$NonFunctionalWaterPtCounts)
+```
+
+```{r}
+localMoranI <- localmoran(nl2ab26391$NonFunctionalWaterPtCounts, 
+                          rswm_q, 
+                          zero.policy = TRUE)
+head(localMoranI)
+```
