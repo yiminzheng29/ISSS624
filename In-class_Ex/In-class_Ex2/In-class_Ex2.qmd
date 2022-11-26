@@ -1,11 +1,10 @@
 ---
 title: "In-class Exercise 2: Birds of a feather flock together - Do functionally similar water points positively co-occur in Nigeria?"
-execute: 
-  warning: false
-  echo: false
-format: html
 author: "Zheng Yimin"
 date: "11/26/2022"
+execute: 
+  warning: false
+format: html
 editor: visual
 ---
 
