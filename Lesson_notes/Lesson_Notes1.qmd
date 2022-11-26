@@ -1,0 +1,111 @@
+---
+title: "Lesson 1: Spatial Weights and Applications"
+format: html
+editor: visual
+---
+
+## Introduction to Spatial Weights
+
+It is a way to define spatial neighbourhood
+
+![](images/Screenshot%202022-11-23%20at%205.11.27%20PM-01.png)
+
+### Defining Spatial Weights
+
+![](images/Screenshot%202022-11-23%20at%205.12.09%20PM.png)
+
+### Contiguity neighbours
+
+Contiguity --\> Common boundary
+
+![](images/Screenshot%202022-11-23%20at%205.15.50%20PM.png)
+
+#### Types of contiguity:
+
+The below 2 are the more common types of contiguity.
+
+-   **Rook** contiguity: neighbours have at least two common boundary points (a segment). This matches the movement of the Rook in chess
+
+-   **Queen** contiguity: matches the movement of Queen in chess.
+
+When polygons have an irregular shape and surface, the differences between the Rook and Queen neighbourhoods become more difficult to grasp.
+
+### Weights matrix
+
+#### Adjacency-based neighbours
+
+![](images/Screenshot%202022-11-23%20at%205.30.28%20PM.png){width="400"}
+
+#### Distance-based neighbours
+
+![](images/Screenshot%202022-11-23%20at%205.30.32%20PM.png){width="410"}
+
+#### Measured distances
+
+![](images/Screenshot%202022-11-23%20at%205.30.39%20PM.png){width="410"}
+
+### Row Standardisation
+
+In practice, Row standardized W matrix is often used, instead of spatial weights.
+
+#### Weight matrix standardisation
+
+There are four types of standardisation:
+
+##### [Line standardisation ("W" coding scheme)]{.underline}
+
+![![](images/Screenshot%202022-11-23%20at%205.34.54%20PM.png){width="517"}](images/Screenshot%202022-11-23%20at%205.34.43%20PM.png)
+
+##### [Global standardisation ("C" coding scheme)]{.underline}
+
+![](images/Screenshot%202022-11-23%20at%205.35.01%20PM.png)
+
+##### [Uniform standardisation ("U" coding scheme)]{.underline}
+
+![](images/Screenshot%202022-11-23%20at%205.35.06%20PM.png)
+
+##### [Standardisation by variance stabilisation ("S" coding scheme)]{.underline}
+
+![](images/Screenshot%202022-11-23%20at%205.35.16%20PM.png)
+
+Line standardisation gives more weight to observations bordering the study zone, with a small number of neighbours. On the contrary, with global or uniform standardisation, the observations in the centre of the study zone, with a large number of neighbours, are subject to more external influences than the border zones. This heterogeneity can have a significant impact on the results of
+spatial autocorrelation tests.
+
+The weight of the standardised matrix based on the "S" coding scheme varies less than those of the standardised matrix based on the "W" scheme. The sum of the weights of the lines varies more for the "S" scheme than for the "W" scheme, but less than for the "B", "C" and "U" schemes *(Bivand et al. 2013b)*
+
+## Applications of Spatial Weights
+
+Formally, for observation i, the spatial lag of yi, refered to as \[Wy\]i (the variable Wy observed for location i) is:
+
+![](images/Screenshot%202022-11-23%20at%205.42.01%20PM.png){width="310"}
+
+where the weights wij consists of elements of the i-th row of the matrix W, matched up with the corresponding elements of the vector y.
+
+### Spatially Lagged Variables
+
+Spatial lag with row-standardized weights
+
+![](images/Screenshot%202022-11-23%20at%205.43.32%20PM.png)
+
+### Spatial window sum
+
+The spatial window sum uses and includes the diagonal element
+
+![](images/Screenshot%202022-11-23%20at%205.43.39%20PM.png)
+
+## References
+
+-   Chapter 2. Codifying the neighbourhood structure of Handbook of Spatial Analysis: Theory and Application with R.
+
+-   François Bavaud (2010) \"Models for Spatial Weights: A Systematic Look\"
+    Geographical Analysis, Vol. 30, No.2, pp 153-171.
+
+-   Tony H. Grubesic and Andrea L. Rosso (2014) \"The Use of Spatially Lagged
+    Explanatory Variables for Modeling Neighborhood Amenities and Mobility in Older Adults\", Cityscape, Vol. 16, No. 2, pp. 205-214.
+
+					
+				
+			
+		
+
+	

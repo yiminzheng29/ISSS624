@@ -6,6 +6,7 @@ listing:
     - "Hands_on_1B.qmd"
     - "In-class_Ex/In-class_Ex1/In-class_Ex1.qmd"
     - "Hands-on_Ex/Hands-on_Ex2/Hands-on_Ex2.qmd"
+    - "In-class_Ex/In-class_Ex2/In-class_Ex2.qmd"
   type: table
 ---
 
