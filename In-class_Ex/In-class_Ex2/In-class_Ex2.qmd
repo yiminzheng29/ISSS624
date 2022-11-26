@@ -5,7 +5,7 @@ execute:
   echo: false
 format: html
 author: "Zheng Yimin"
-date: "11/21/2022"
+date: "11/26/2022"
 editor: visual
 ---
 
@@ -81,7 +81,6 @@ Thing to learn from the code chunk above.
 In the code chunk below, `replace_na()` is used to recode all the *NA* values in *status_cle* field into *Unknown*.
 
 ```{r}
-#| eval: False
 wp_nga <- read_rds("data/wp_nga.rds") %>%
   mutate(status_cle = replace_na(status_cle, "Unknown"))
 ```
@@ -170,7 +169,7 @@ Now, you have the tidy sf data table subsequent analysis. We will save the sf da
 write_rds(nga_wp, "data/nga_wp.rds")
 ```
 
-Before you end this section, please remember to delete away all the raw data. Notice that the only data file left is *nga_wp.rds* and it's file size is aroung 2.1MB.
+Before you end this section, please remember to delete away all the raw data. Notice that the only data file left is *nga_wp.rds* and it's file size is around 2.1MB.
 
 ## 7. Visualising the spatial distribution of water points
 

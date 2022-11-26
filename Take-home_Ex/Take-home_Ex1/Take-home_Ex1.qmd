@@ -143,10 +143,6 @@ nl2ab26391 <- st_transform(nl2ab, crs=26391)
 The code chunk below converts the nigeria data frame into a simple feature data frame. This is done by using [*st_as_sf()*](https://r-spatial.github.io/sf/reference/st_as_sf.html) of **sf** packages.
 
 ```{r}
-list(nigeria26391)
-```
-
-```{r}
 nigeria26391 <- st_as_sf(nigeria, 
                        coords = c("#lon_deg", "#lat_deg"),
                        crs=4326) %>%
