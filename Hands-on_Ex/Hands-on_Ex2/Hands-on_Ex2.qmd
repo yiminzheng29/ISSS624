@@ -1,7 +1,7 @@
 ---
 title: "Hands-on Exercise 2: Global and Local Measures of Spatial Autocorrelation"
 author: "Zheng Yimin"
-date: "11/21/2022"
+date: "11/29/2022"
 editor: visual
 ---
 
@@ -490,16 +490,17 @@ The code chunks below show the steps to prepare a LISA cluster map.
 quadrant <- vector(mode="numeric",length=nrow(localMI))
 ```
 
-Next, we centers the variable of interest around its mean.
+Next, derives the spatially lagged variable of interest (i.e. GDPPC) and centers the spatially lagged variable around its mean.
 
 ```{r}
-DV <- hunan$GDPPC - mean(hunan$GDPPC)     
+hunan$lag_GDPPC <- lag.listw(rswm_q, hunan$GDPPC)
+DV <- hunan$lag_GDPPC - mean(hunan$lag_GDPPC)     
 ```
 
 This is follow by centering the local Moran's around the mean.
 
 ```{r}
-C_mI <- localMI[,1] - mean(localMI[,1])
+LM_I <- localMI[,1] - mean(localMI[,1])
 ```
 
 Next, we will set a statistical significance level for the local Moran.
@@ -511,10 +512,10 @@ signif <- 0.05
 These four command lines define the high-high, low-low, low-high and high-low categories.
 
 ```{r}
-quadrant[DV >0 & C_mI>0] <- 4      
-quadrant[DV <0 & C_mI<0] <- 2      
-quadrant[DV <0 & C_mI>0] <- 1
-quadrant[DV >0 & C_mI<0] <- 3
+quadrant[DV <0 & LM_I>0] <- 1
+quadrant[DV >0 & LM_I<0] <- 2
+quadrant[DV <0 & LM_I<0] <- 3  
+quadrant[DV >0 & LM_I>0] <- 4      
 ```
 
 Lastly, places non-significant Moran in the category 0.
@@ -527,13 +528,14 @@ In fact, we can combined all the steps into one single code chunk as shown below
 
 ```{r}
 quadrant <- vector(mode="numeric",length=nrow(localMI))
-DV <- hunan$GDPPC - mean(hunan$GDPPC)     
-C_mI <- localMI[,1] - mean(localMI[,1])    
+hunan$lag_GDPPC <- lag.listw(rswm_q, hunan$GDPPC)
+DV <- hunan$lag_GDPPC - mean(hunan$lag_GDPPC)     
+LM_I <- localMI[,1]   
 signif <- 0.05       
-quadrant[DV >0 & C_mI>0] <- 4      
-quadrant[DV <0 & C_mI<0] <- 2      
-quadrant[DV <0 & C_mI>0] <- 1
-quadrant[DV >0 & C_mI<0] <- 3
+quadrant[DV <0 & LM_I>0] <- 1
+quadrant[DV >0 & LM_I<0] <- 2
+quadrant[DV <0 & LM_I<0] <- 3  
+quadrant[DV >0 & LM_I>0] <- 4    
 quadrant[localMI[,5]>signif] <- 0
 ```
 
