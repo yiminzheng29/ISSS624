@@ -307,7 +307,7 @@ Matrix reorder is very important for mining the hiden structure and patter in th
 
 From the scatterplot matrix, it is clear that ***Freehold*** is highly correlated to ***LEASE_99YEAR***. In view of this, it is wiser to only include either one of them in the subsequent model building. As a result, ***LEASE_99YEAR*** is excluded in the subsequent model building.
 
-### 8.3 Building a hedonistic pricing model using multiple linear regression method
+### 8.3 Building a hedonic pricing model using multiple linear regression method
 
 The code chunk below using **lm()** to calibrate the multiple linear regression model.
 
@@ -498,7 +498,7 @@ The Global Moran\'s I test for residual spatial autocorrelation shows that it\'s
 
 Since the Observed Global Moran I = 0.1424418 which is greater than 0, we can infer than the residuals resemble cluster distribution.
 
-## 9. Building Hedonistic Pricing Models using GWmodel
+## 9. Building Hedonic Pricing Models using GWmodel
 
 In this section, you are going to learn how to modelling hedonic pricing using both the fixed and adaptive bandwidth schemes
 

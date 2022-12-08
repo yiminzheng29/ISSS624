@@ -1,5 +1,5 @@
 ---
-title: "Take-home Exercise 2: Cluster Analysis of Nigeria's Water Points"
+title: "Take-home Exercise 2: Regionalisation of Multivariate Water Point Attributes with Non-spatially Constrained and Spatially Constrained Clustering Methods"
 author: "Zheng Yimin"
 date: "12/10/2022"
 format: html
