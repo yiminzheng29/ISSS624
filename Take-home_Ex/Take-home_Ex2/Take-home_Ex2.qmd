@@ -892,9 +892,7 @@ plot(nigeria.nb,
      add=TRUE)
 ```
 
-### 7.3 Computing minimum spanning tree
-
-#### 7.3.1 Calculating edge costs
+### 7.3 Calculating edge costs
 
 In this step, we will use [`nbcosts()`](https://r-spatial.github.io/spdep/reference/nbcosts.html) of **spdep** package to compute cost of each edge, which is the distance between the nodes. This function computes the distances using a data frame with observations vector in each node.
 
