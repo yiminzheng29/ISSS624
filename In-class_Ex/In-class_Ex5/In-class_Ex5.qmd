@@ -1,0 +1,528 @@
+---
+title: "In-class Exercise 5: Modeling the Spatial Variation of the Explanatory Factors of Water Point Status using Geographically Weighted Logistic Regression"
+author: "Zheng Yimin"
+date: "12/17/2022"
+format: html
+editor: visual
+---
+
+## Setting the scene
+
+-   To build an exploratory model to discover factors affecting water point in Osun State, Nigeria
+
+-   Study area: Osun State, Nigeria
+
+-   Data sets used:
+
+    -   *Osun.rds*, which contains LGA boundaries of Osun state. It is in sf polygon data frame, and
+
+    -   *Osun_wp_sf.rds*, which contains water points within Osun state. It is in sf point data frame
+
+## Model Variables
+
+-   Dependent variable: Water point status (i.e. functional/non-functional)
+
+-   Independent variables:
+
+    -   distance_to_primary_road (continuous),
+
+    -   distance_to_secondary_road (continuous),
+
+    -   distance_to_tertiary_road (continuous),
+
+    -   distance_to_city (continuous),
+
+    -   distance_to_town (continuous),
+
+    -   water_point_population (continuous),
+
+    -   local_population_11km (continuous),
+
+    -   usage_capacity (categorical),
+
+    -   is_urban (categorical),
+
+    -   water_source_clean (categorical)
+
+## IntroductionLogistic Regression Model
+
+We will take a look at the theory of Logistic regression model before performing our analysis.
+
+### Simple Logistic Regression Model
+
+### Let's take a look at the formula for a simple logistic regression model:
+
+![](Screenshot%202022-12-17%20at%208.37.36%20AM.png)
+
+### Multiple Logistic Regression model
+
+![](Screenshot%202022-12-17%20at%208.46.06%20AM.png)
+
+### Assumptions of logistic regression
+
+-   Logistic regression **does not** assume a linear relationship between dependent and independent variables.
+
+-   For binary logistic regression, the dependent variable must be a dichotomy (2 categories).
+
+-   The independent variables need not be interval, nor normally distributed, nor linearly related, nor of equal variance within each group.
+
+-   The categories (groups) must be **mutually exclusive and exhaustive**; a case can only be in one group and every case must be a member of one of the groups.
+
+### Data requirements of logistic regression
+
+-   Large samples are required
+
+-   It does not use least squares method, but instead, it uses an algorithm called maximum likelihood (expectation of the probability)
+
+## Getting started
+
+The code chunks below installs and launches the R packages into R environment. The below packages mentioned are specifically used for this exercise to support our analysis.
+
+***blorr*** - for error matrix computations
+
+***skimr, funModeling*** - for exploratory data analysis
+
+***caret*** - commonly for machine learning purposes, and it is used in this exercise to compute the error matrix for comparison with the output from blorr.
+
+```{r}
+pacman::p_load(sf, tidyverse, funModeling, blorr, corrplot, spdep, GWmodel, tmap, skimr, caret)
+```
+
+## Data import
+
+We will now import the required dataset into the R environment. Two datasets will be used.
+
+```{r}
+Osun <- read_rds("rds/Osun.rds")
+Osun_wp_sf <- read_rds("rds/Osun_wp_sf.rds")
+```
+
+We will also use **funModeling** to take a look at the data records under the *status* column.
+
+```{r}
+Osun_wp_sf %>% freq(input="status")
+```
+
+```{r}
+tmap_mode("view")
+tm_shape(Osun) +
+  # tmap_options(check.and.fix=TRUE) +
+  tm_polygons(alpha = 0.4) +
+  tm_shape(Osun_wp_sf) +
+  tm_dots(col="status", alpha = 0.6) +
+  tm_view(set.zoom.limits = c(9,12))
+```
+
+It is interesting to note here that the FALSE variables are closely clustered in some of the regions.
+
+## Exploratory Data Analysis (EDA)
+
+*Note: Regression models are very sensitive to missing values. Hence, we should remove all missing values from the data set before continuing with our analysis.*
+
+We will now use skimr to do EDA. It provides a tabular format of the summary statistics of the variables that we will be looking into.
+
+### Summary statistics with skimr
+
+```{r}
+Osun_wp_sf %>% skim()
+```
+
+We can see from the second table of the summary statistics that some of the columns contains many missing values (e.g. *Clean_ADM3*). Hence, we should remove columns that have many missing values. Also, as seen from the third table, there are also some variables with excessive missing values (e.g. *install_year*) and these should be removed as well.
+
+We can also notice in the third table, the *water_point_population* and *local_population_11km*, have 4 missing values respectively, and they are all referring to the same data records. Hence, we will run the code chunk below to extract the variables used in this exercise, as well as remove the 4 data records that are missing in both the *water_point_population* and *local_population_11km* columns. *usage_capacity* has also been changed to factor class (with only two levels) from numeric class.
+
+```{r}
+Osun_wp_sf_clean <- Osun_wp_sf %>%
+  filter_at(vars(status, distance_to_primary_road, 
+                 distance_to_secondary_road,
+                 distance_to_tertiary_road,
+                 distance_to_city, 
+                 distance_to_town,
+                 water_point_population,
+                 local_population_1km,
+                 usage_capacity,
+                 is_urban,
+                 water_source_clean),
+            all_vars(!is.na(.))) %>%
+  mutate(usage_capacity = as.factor(usage_capacity))
+```
+
+```{r}
+Osun_wp <- Osun_wp_sf_clean %>%
+  select(c(7,35:39,42:43, 46:47,57)) %>%
+  st_set_geometry(NULL)
+```
+
+## Correlation Analysis
+
+We will run the code chunk below to perform correlation analysis.
+
+```{r}
+cluster_vars.cor = cor(Osun_wp[,2:7])
+corrplot.mixed(cluster_vars.cor,
+               lower = "ellipse",
+               upper = "number",
+               tl.pos = "lt",
+               diag = "l",
+               tl.col = "black")
+```
+
+We can see there is no sign of multi-collinearity in the correlation plot above (i.e. no 2 independent variables have correlation of higher than 0.85).
+
+## Building a logistic Regression Model
+
+We will now construct our logistic regression model.
+
+```{r}
+model <- glm(status ~ distance_to_primary_road + 
+                 distance_to_secondary_road +
+                 distance_to_tertiary_road +
+                 distance_to_city +
+                 distance_to_town + 
+                 water_point_population+ 
+                 local_population_1km +
+                 usage_capacity +
+                 is_urban +
+                 water_source_clean, 
+             data = Osun_wp_sf_clean, 
+             family = binomial(link="logit"))
+```
+
+We will run `blr_regress()` to generate the output, based on our code chunk above.
+
+```{r}
+blr_regress(model)
+```
+
+### Interpretation of logistic regression
+
+Interpretation should only be done after analysing the respective [p-values]{.underline} of each of the variables.
+
+For categorical variables, a positive p-value implies an above average correlation and a negative p-value implies a below average correlation.
+
+For continuous variables, a positive p-value implies a direct correlation and a negative value implies an inverse correlation, while the magnitude of the p-value gives the strength of the correlation.
+
+We can notice in the above summary, there are two variables (*distance_to_primary_road* & *distance_to_secondary_road*) with p value greater than the confidence interval of 0.05. Hence, we will exclude these 2 variables as they are not statistically significant.
+
+In the code chunk below, `blr_confusion_matrix()` of blorr package is used to compute the confusion matrix of the estimated outcomes by using 0.5 as the cutoff value.
+
+```{r}
+blr_confusion_matrix(model, cutoff = 0.5)
+```
+
+The validity of a cut-off is measured using sensitivity, specificity and accuracy.
+
+-   **Sensitivity**: The % of correctly classified events out of all events = TP (TP + FN)
+
+    -   The value of true positives is higher than the value of true negatives.
+
+-   **Specificity**: The % of correctly classified non-events out of all non-events = TN / (TN+ FP)
+
+-   **Accuracy**: The % of correctly classified observations over all observations = (TP + TN) / (TP + TN + FP + FN).
+
+-   **False positive rate** = FP / (TN + FP)
+
+    -   We can see that the accuracy here is 0.6739, which is a relatively high value.
+
+## Building Geographically Weighted Logistic Regression (gwLR) models 
+
+### Converting from sf to sp data frame
+
+We will first convert *Osun_wp_sf_clean* to Spatial Point data frame (*Osun_wp_sp*). The clean version is used
+
+```{r}
+Osun_wp_sp <- Osun_wp_sf_clean %>%
+  select(c(status, 
+                 distance_to_primary_road, 
+                 distance_to_secondary_road,
+                 distance_to_tertiary_road,
+                 distance_to_city, 
+                 distance_to_town,
+                 water_point_population,
+                 local_population_1km,
+                 usage_capacity,
+                 is_urban,
+                 water_source_clean)) %>%
+  as_Spatial()
+Osun_wp_sp
+```
+
+### Building Fixed Bandwidth GWR Model
+
+#### Computing fixed bandwidth
+
+```{r}
+bw.fixed <- bw.ggwr(status ~ distance_to_primary_road + 
+                 distance_to_secondary_road +
+                 distance_to_tertiary_road +
+                 distance_to_city +
+                 distance_to_town + 
+                 water_point_population+ 
+                 local_population_1km +
+                 usage_capacity +
+                 is_urban +
+                 water_source_clean, 
+             data = Osun_wp_sp,
+             family="binomial",
+             approach="AIC",
+             kernel="gaussian",
+             adaptive=FALSE,
+             longlat=FALSE)
+```
+
+```{r}
+bw.fixed
+```
+
+We can see that the recommended maximum bandwidth is 2,599.672m. We will input this value into the code chunk below to compute the geographically weighted logistic regression.
+
+```{r}
+gwlr.fixed <- ggwr.basic(status ~ 
+                 distance_to_primary_road + 
+                 distance_to_secondary_road +
+                 distance_to_tertiary_road +
+                 distance_to_city +
+                 distance_to_town + 
+                 water_point_population+ 
+                 local_population_1km +
+                 usage_capacity +
+                 is_urban +
+                 water_source_clean,
+              data = Osun_wp_sp,
+              bw=bw.fixed,
+              family="binomial",
+              kernel = "gaussian",
+              adaptive=FALSE,
+              longlat=FALSE)
+```
+
+```{r}
+gwlr.fixed
+```
+
+Here, the AIC value is computed and compared with non-geographic weighted logistic regression AIC value. We can see that the AIC value for geographic weighted logistic regression is lower (4,414.606) in this case. This shows that the model is actually improved since the AIC value has decreased.
+
+Now we will use caret package to analyse the aspects which has resulted in the model's improvement.
+
+### Model Assessment
+
+#### Converting SDF into sf data frame
+
+To assess the performance of the gwLR, firstly, we will convert the SDF object in as data frame by using the code chunk below.
+
+```{r}
+gwr.fixed <- as.data.frame(gwlr.fixed$SDF)
+```
+
+Next, we will label *yhat* values greater than or equal to 0.5 into 1 and else, 0. The result of the logic comparison operation will be saved into a field called *most*. *most* is a logical function that has only True or False values, which matches with the observed values.
+
+```{r}
+gwr.fixed <- gwr.fixed %>%
+  mutate(most = ifelse(
+    gwr.fixed$yhat >= 0.5, T, F))
+```
+
+The code chunk below generates another confusion matrix, which will be used in comparison to the confusion matrix generated at an earlier step (global version).
+
+```{r}
+gwr.fixed$y <- as.factor(gwr.fixed$y)
+gwr.fixed$most <- as.factor(gwr.fixed$most)
+CM <- confusionMatrix(data=gwr.fixed$most, 
+                      positive="TRUE",
+                      reference = gwr.fixed$y)
+
+```
+
+```{r}
+CM
+```
+
+As we can see, the structure of both confusion matrix are more or less the same. However, the *accuracy* has increased to 0.8837, which is a significant increase from the global version of 0.6739. There is no change in the variables, except that one model is non-geographic weighted, and the other is geographic weighted.
+
+The *true negatives* has also increased from 0.6154 to 0.9005. This means that we can explain the non-functional water points better now. In order to better manage the water points, we should look more into the local neighbourhoods more, rather than at a global scale (i.e. consider local factors instead).
+
+We can thus see that the geographic weighted model is a better model.
+
+### Visualising gwLR
+
+```{r}
+Osun_wp_sf_selected <- Osun_wp_sf_clean %>%
+  select(c(ADM2_EN, ADM2_PCODE, ADM1_EN, ADM1_PCODE, status))
+```
+
+```{r}
+gwr_sf.fixed <- cbind(Osun_wp_sf_selected, gwr.fixed)
+```
+
+The code chunk below is used to create an interactive point symbol map.
+
+```{r}
+tmap_mode("view")
+prob_T <- tm_shape(Osun) +
+  tm_polygons(alpha=0.1) +
+  tm_text(text="ADM2_EN") +
+  tm_shape(gwr_sf.fixed) +
+  tm_dots(col="yhat",
+          border.col="gray60",
+          border.lwd=1) +
+  tm_view(set.zoom.limits = c(8,14))
+prob_T
+```
+
+From the map above, we can note that some of the states had more clusters of water points than as compared to the others. This is more prevalent in states like Ifelodun, and etc.
+
+```{r}
+# tertiary_TV <- tm_shape(Osun) +
+  #tm_polygons(alpha=0.1) +
+  #tm_shape(gwr_sf.fixed) +
+  #tm_dots(col="distance_to_tertiary_road_TV",border.col="gray60",border.lwd=1) +
+  #tm_view(set.zoom.limits=c(8,14))
+```
+
+```{r}
+# tmap_arrange(tertiary_S,tertiary_TV,asp=1,ncol=2,sync=TRUE)
+```
+
+## Building Revised Geographically Weighted Logistic Regression (gwLR) models 
+
+As we have seen earlier on, there are 2 variables that are not statistically significant. We will proceed to drop these 2 variables and compute the fixed bandwidth geographically weighted logistic regression model.
+
+### Converting from sf to sp data frame
+
+We will first convert *Osun_wp_sf_clean* to Spatial Point data frame (*Osun_wp_sp_new*). The clean version is used
+
+```{r}
+Osun_wp_sp_new <- Osun_wp_sf_clean %>%
+  select(c(status, 
+                 distance_to_tertiary_road,
+                 distance_to_city, 
+                 distance_to_town,
+                 water_point_population,
+                 local_population_1km,
+                 usage_capacity,
+                 is_urban,
+                 water_source_clean)) %>%
+  as_Spatial()
+Osun_wp_sp_new
+```
+
+### Building Fixed Bandwidth GWR Model
+
+#### Computing fixed bandwidth
+
+```{r}
+bw_new.fixed <- bw.ggwr(status ~ 
+                 distance_to_tertiary_road +
+                 distance_to_city +
+                 distance_to_town + 
+                 water_point_population+ 
+                 local_population_1km +
+                 usage_capacity +
+                 is_urban +
+                 water_source_clean, 
+             data = Osun_wp_sp_new,
+             family="binomial",
+             approach="AIC",
+             kernel="gaussian",
+             adaptive=FALSE,
+             longlat=FALSE)
+```
+
+```{r}
+bw_new.fixed
+```
+
+We can see now that the revised fixed bandwidth is 2,377.371m.
+
+```{r}
+gwlr_new.fixed <- ggwr.basic(status ~ 
+                 distance_to_tertiary_road +
+                 distance_to_city +
+                 distance_to_town + 
+                 water_point_population+ 
+                 local_population_1km +
+                 usage_capacity +
+                 is_urban +
+                 water_source_clean,
+              data = Osun_wp_sp_new,
+              bw=bw_new.fixed,
+              family="binomial",
+              kernel = "gaussian",
+              adaptive=FALSE,
+              longlat=FALSE)
+```
+
+```{r}
+gwlr_new.fixed
+```
+
+We can see that in this scenario, the AIC value has slightly increased to 4418.776 and the AICc value has slightly decreased to 4744.213. The pseudo r-squared value has also decreased slightly to 0.569.
+
+Usually, the performance would have dropped significantly with a reduction in explanatory variables, but it does not happen in this case. Hence, we can prove that the geographically weighted logistic regression model is still a more robust measure, as it did not show much changes in the AIC from the previous geographically weighted logistic regression model, despite having dropped some of the explanatory variables.
+
+### Model Assessment
+
+#### Converting SDF into sf data frame
+
+To assess the performance of the gwLR, firstly, we will convert the SDF object in as data frame by using the code chunk below.
+
+```{r}
+gwr_new.fixed <- as.data.frame(gwlr_new.fixed$SDF)
+```
+
+Next, we will label *yhat* values greater than or equal to 0.5 into 1 and else, 0. The result of the logic comparison operation will be saved into a field called *most*. *most* is a logical function that has only True or False values, which matches with the observed values.
+
+```{r}
+gwr_new.fixed <- gwr_new.fixed %>%
+  mutate(most = ifelse(
+    gwr_new.fixed$yhat >= 0.5, T, F))
+```
+
+The code chunk below generates another confusion matrix, which will be used in comparison to the confusion matrix generated at an earlier step (global version).
+
+```{r}
+gwr_new.fixed$y <- as.factor(gwr_new.fixed$y)
+gwr_new.fixed$most <- as.factor(gwr_new.fixed$most)
+CM_new <- confusionMatrix(data=gwr_new.fixed$most,
+                          positive="TRUE",
+                      reference = gwr_new.fixed$y)
+
+CM_new
+```
+
+As we can see, all 3 models have more or less the structure for the confusion matrix generated. The *accuracy* in the revised model has increased from 0.8837 to 0.8846, which is a slight increase.
+
+Most of the other values did not vary much from the previous geographically weighted logistic regression model, which shows that overall, the geographically weighted logistic regression model is a very robust model. It's results do not vary much despite having some of the explanatory variables being dropped.
+
+### Visualising revised gwLR
+
+```{r}
+gwr_sf_new.fixed <- cbind(Osun_wp_sf_selected, gwr_new.fixed)
+```
+
+The code chunk below is used to create an interactive point symbol map.
+
+```{r}
+tmap_mode("view")
+prob_T_new <- tm_shape(Osun) +
+  tm_polygons(alpha=0.1) +
+  tm_text(text="ADM2_EN") +
+  tm_shape(gwr_sf_new.fixed) +
+  tm_dots(col="yhat",
+          border.col="gray60",
+          border.lwd=1) +
+  tm_view(set.zoom.limits = c(8,14))
+prob_T_new
+```
+
+As we can see, some of the water points are still relatively closely clustered, and the results are similar to the ones that are plotted in the previous gwLR model.
+
+A side-by-side comparison would show the similarities.
+
+```{r}
+tmap_arrange(prob_T, prob_T_new, asp=1, ncol=2)
+```
+
+## Conclusion
+
+As we can see, the geographically weighted logistic regression model is a very robust measure when it comes to modeling the Spatial Variation of the Explanatory Factors of Water Point Status, than as compared to the normal logistic regression model.
